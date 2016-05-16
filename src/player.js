@@ -20,6 +20,8 @@
 
       this_.player = new YT.Player(this_.options.playerId, {
         videoId: this_.options.videoId,
+        height: this_.options.height,
+        width: this_.options.width,
         events: {
         }
       });
@@ -44,6 +46,7 @@
   };
   Player.prototype._onReady = function() {
   };
+  
   // Private Methods
 
   // Utility method to extend defaults with user options
