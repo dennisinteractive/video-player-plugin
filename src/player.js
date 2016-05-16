@@ -20,6 +20,7 @@
 
       this_.player = new YT.Player(this_.options.playerId, {
         videoId: this_.options.videoId,
+        events: {
         }
       });
 
