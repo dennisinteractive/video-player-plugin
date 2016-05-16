@@ -7,10 +7,15 @@
 <body>
 
     <div id="video-player"></div>
+    <button class="play-video">Play me</button>
+    <button class="pause-video">Pause me</button>
+
     <script src="../src/player.js"></script>
     <script>
         var myVideo = new Player({
             videoId: '9FiNW55mPxw',
+            playButton: '.play-video',
+            pauseButton: '.pause-video'
         });
         myVideo.init();
     </script>

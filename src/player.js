@@ -1,11 +1,14 @@
 (function() {
 
   this.Player = function() {
+
     var defaults = {
         width: 600,
         height: 400,
         playerId: 'video-player',
         videoId: null,
+        playButton: null,
+        pauseButton: null
     };
 
     if (arguments[0] && typeof arguments[0] === 'object') {
@@ -22,10 +25,14 @@
         videoId: this_.options.videoId,
         height: this_.options.height,
         width: this_.options.width,
+        playButton: this_.options.playButton,
+        pauseButton: this_.options.pauseButton,
         events: {
         }
       });
 
+      // Load custom controls
+      this_.controls();
     };
 
     // Test if the youtube api is loaded
@@ -45,6 +52,25 @@
 
   };
   Player.prototype._onReady = function() {
+  // Controls
+  Player.prototype.controls = function() {
+    var this_ = this;
+
+    // Play button
+    var playButton = this.options.playButton;
+    if(playButton) {
+      document.querySelector(playButton).addEventListener('click', function() {
+        this_.player.playVideo();
+      });
+    }
+
+    // Pause video
+    var pauseButton = this.options.pauseButton;
+    if(pauseButton) {
+      document.querySelector(pauseButton).addEventListener('click', function() {
+        this_.player.pauseVideo();
+      });
+    }
   };
   
   // Private Methods
