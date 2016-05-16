@@ -51,7 +51,8 @@
     }
 
   };
-  Player.prototype._onReady = function() {
+  Player.prototype._onReady = function() {};
+  
   // Controls
   Player.prototype.controls = function() {
     var this_ = this;
