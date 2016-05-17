@@ -12,6 +12,7 @@ Video player plugin that uses the Youtube api
 
 Option | Type | Default | Description
 ------ | ---- | ------- | -----------
+playerId | string | 'video-player' | Sets ID of video wrapper.
 videoId | string | null | Sets ID of video to be displayed.
 width | int | 800 | Sets width of video.
 height | int | 600 | Sets height of video.
