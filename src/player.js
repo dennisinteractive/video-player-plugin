@@ -12,6 +12,7 @@
         autoPlay: null,
         controls: null,
         relatedVideos: 0,
+        showInfo: null,
     };
 
     if (arguments[0] && typeof arguments[0] === 'object') {
@@ -34,6 +35,7 @@
           autoplay: this_.options.autoPlay,
           controls: this_.options.controls,
           rel: this_.options.relatedVideos,
+          showinfo: this_.options.showInfo,
         },
         events: {
         }
