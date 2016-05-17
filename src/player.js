@@ -22,6 +22,8 @@
 
   Player.prototype.init = function() {
 
+    buildPlayer.call( this );
+
     var this_ = this;
     var callback = function() {
 
@@ -63,6 +65,22 @@
     }
 
   };
+
+  function buildPlayer() {
+
+    var docFrag;
+
+    docFrag = document.createDocumentFragment();
+
+    this.player = document.createElement( 'div' );
+    this.player.className = 'custom-player';
+    this.player.id = this.options.playerId;
+
+    docFrag.appendChild( this.player );
+
+    document.body.appendChild( docFrag );
+
+  }
 
   // Events
   Player.prototype._onPlayerReady = function( event ){};
