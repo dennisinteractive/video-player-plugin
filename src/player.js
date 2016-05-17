@@ -38,6 +38,8 @@
           showinfo: this_.options.showInfo,
         },
         events: {
+          onReady: this_._onPlayerReady,
+          onStateChange: this_._onStateChange
         }
       });
 
@@ -61,8 +63,11 @@
     }
 
   };
-  Player.prototype._onReady = function() {};
-  
+
+  // Events
+  Player.prototype._onPlayerReady = function( event ){};
+  Player.prototype._onStateChange = function( event ){};
+
   // Controls
   Player.prototype.customControls = function() {
     var this_ = this;
