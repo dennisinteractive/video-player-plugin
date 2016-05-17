@@ -36,7 +36,7 @@
       });
 
       // Load custom controls
-      this_.controls();
+      this_.customControls();
     };
 
     // Test if the youtube api is loaded
@@ -58,7 +58,7 @@
   Player.prototype._onReady = function() {};
   
   // Controls
-  Player.prototype.controls = function() {
+  Player.prototype.customControls = function() {
     var this_ = this;
 
     // Play button
