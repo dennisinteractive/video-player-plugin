@@ -9,7 +9,7 @@
         videoId: null,
         playButton: null,
         pauseButton: null,
-        autoPlay: null
+        autoPlay: null,
     };
 
     if (arguments[0] && typeof arguments[0] === 'object') {
@@ -29,7 +29,7 @@
         playButton: this_.options.playButton,
         pauseButton: this_.options.pauseButton,
         playerVars: {
-          autoplay: this_.options.autoPlay
+          autoplay: this_.options.autoPlay,
         },
         events: {
         }
