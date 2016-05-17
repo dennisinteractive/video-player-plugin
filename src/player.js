@@ -10,6 +10,7 @@
         playButton: null,
         pauseButton: null,
         autoPlay: null,
+        controls: null,
     };
 
     if (arguments[0] && typeof arguments[0] === 'object') {
@@ -30,6 +31,7 @@
         pauseButton: this_.options.pauseButton,
         playerVars: {
           autoplay: this_.options.autoPlay,
+          controls: this_.options.controls,
         },
         events: {
         }
