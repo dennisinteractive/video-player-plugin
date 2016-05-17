@@ -15,3 +15,4 @@ Option | Type | Default | Description
 videoId | string | null | Sets ID of video to be displayed
 width | int | 800 | Sets width of video
 height | int | 600 | Sets height of video
+autoPlay | boolean | null | Autoplay video on page load
