@@ -11,6 +11,7 @@
         pauseButton: null,
         autoPlay: null,
         controls: null,
+        relatedVideos: 0,
     };
 
     if (arguments[0] && typeof arguments[0] === 'object') {
@@ -32,6 +33,7 @@
         playerVars: {
           autoplay: this_.options.autoPlay,
           controls: this_.options.controls,
+          rel: this_.options.relatedVideos,
         },
         events: {
         }

@@ -12,8 +12,9 @@ Video player plugin that uses the Youtube api
 
 Option | Type | Default | Description
 ------ | ---- | ------- | -----------
-videoId | string | null | Sets ID of video to be displayed
-width | int | 800 | Sets width of video
-height | int | 600 | Sets height of video
-autoPlay | boolean | null | Autoplay video on page load
-controls | boolean | null | Show/ hide vide controls. Takes 1 or 0. Use 0 to turn controls off.
+videoId | string | null | Sets ID of video to be displayed.
+width | int | 800 | Sets width of video.
+height | int | 600 | Sets height of video.
+autoPlay | int | null | Autoplay video on page load. Takes 1 or 0. Use 0 to turn autoPlay off.
+controls | int | null | Show/ hide vide controls. Takes 1 or 0. Use 0 to turn controls off.
+relatedVideos | int | null | Show/ hide vide controls. Takes 1 or 0. Turned off by default.
