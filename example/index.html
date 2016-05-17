@@ -6,7 +6,7 @@
 </head>
 <body>
 
-    <div id="video-player"></div>
+    <div id="my-video-player"></div>
     <button class="play-video">Play me</button>
     <button class="pause-video">Pause me</button>
 
@@ -14,6 +14,7 @@
     <script>
         var myVideo = new Player({
             videoId: '9FiNW55mPxw',
+            playerId: 'my-video-player',
             playButton: '.play-video',
             pauseButton: '.pause-video'
         });
