@@ -24,10 +24,10 @@
     }
 
     // Global vars
-    wrap = this.options.wrap;
-    mute = this.options.mute;
     playButton = this.options.playButton;
     pauseButton = this.options.pauseButton;
+    wrap = this.options.wrap;
+    mute = this.options.mute;
 
   };
 
