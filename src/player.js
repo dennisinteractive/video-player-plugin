@@ -21,8 +21,9 @@
   };
 
   Player.prototype.init = function() {
+    var this_ = this;
 
-    buildPlayer.call( this );
+    createElement('div', 'custom-player', this.options.playerId);
 
     var this_ = this;
     var callback = function() {
@@ -66,21 +67,11 @@
 
   };
 
-  function buildPlayer() {
 
-    var docFrag;
 
-    docFrag = document.createDocumentFragment();
 
-    this.player = document.createElement( 'div' );
-    this.player.className = 'custom-player';
-    this.player.id = this.options.playerId;
 
-    docFrag.appendChild( this.player );
-
-    document.body.appendChild( docFrag );
-
-  }
+    }
 
   // Events
   Player.prototype._onPlayerReady = function( event ){};
@@ -108,6 +99,22 @@
   };
   
   // Private Methods
+
+  // Build the necessary markup
+  // and inject it into the document if needed
+  function createElement( el, className, id ) {
+    var docFrag;
+
+    docFrag = document.createDocumentFragment();
+
+    this.element = document.createElement( el );
+    this.element.className = className;
+    this.element.id = id;
+
+    docFrag.appendChild( this.element );
+
+    document.body.appendChild( docFrag );
+  }
 
   // Utility method to extend defaults with user options
   function extendDefaults( source, properties ) {
