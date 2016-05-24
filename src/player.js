@@ -29,6 +29,8 @@
     wrap = this.options.wrap;
     mute = this.options.mute;
 
+    this.init();
+
   };
 
   Player.prototype.init = function() {
