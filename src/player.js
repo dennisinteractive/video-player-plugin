@@ -13,7 +13,7 @@
         controls: null,
         relatedVideos: 0,
         showInfo: null,
-        wrap: true,
+        wrap: null,
         wrapClass: 'custom-player-wrapper'
     };
 
