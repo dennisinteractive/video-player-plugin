@@ -86,7 +86,9 @@
         pauseButton = this.options.pauseButton,
         wrap = this.options.wrap;
 
-    createElement('div', 'custom-controls');
+    if( playButton || pauseButton ) {
+      createElement('div', 'custom-controls');
+    }
 
 
     if( wrap ) {
@@ -124,11 +126,9 @@
   };
 
 
-
   // Events
   Player.prototype._onPlayerReady = function( event ){};
   Player.prototype._onStateChange = function( event ){};
-
 
 
   // Private Methods
