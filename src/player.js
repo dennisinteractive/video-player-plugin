@@ -60,9 +60,11 @@
           onStateChange: this_._onStateChange
         }
       });
-
+      
       // Load custom controls
-      this_.customControls();
+      if( playButton || pauseButton ) {
+        this_.customControls();
+      }
     };
 
     // Test if the youtube api is loaded
@@ -89,10 +91,8 @@
         pauseButton = this.options.pauseButton,
         wrap = this.options.wrap;
 
-    if( playButton || pauseButton ) {
-      createElement('div', 'custom-controls');
-    }
 
+    createElement('div', 'custom-controls');
 
     if( wrap ) {
       var controls = document.querySelector('.custom-controls'),
@@ -100,7 +100,6 @@
 
       wrapper.appendChild(controls);
     }
-
 
     // Play button
     if( playButton ) {
