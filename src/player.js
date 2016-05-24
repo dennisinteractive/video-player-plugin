@@ -29,6 +29,7 @@
     wrap = this.options.wrap;
     mute = this.options.mute;
 
+    // Run Player.init()
     this.init();
 
   };
