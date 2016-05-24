@@ -34,7 +34,7 @@
   Player.prototype.init = function() {
     var this_ = this;
 
-    createElement('div', 'custom-player', this.options.playerId);
+    generateEl('div', 'custom-player', this.options.playerId);
 
     if( wrap ) {
       wrapper = document.createElement('div');
@@ -91,7 +91,7 @@
   Player.prototype.customControls = function() {
     var this_ = this;
 
-    createElement('div', 'custom-controls');
+    generateEl('div', 'custom-controls');
 
     if( wrap ) {
       var controls = document.querySelector('.custom-controls'),
@@ -140,7 +140,8 @@
 
   // Build the necessary markup
   // and inject it into the document if needed
-  function createElement( el, className, id ) {
+  function generateEl( el, className, id ) {
+
     var docFrag;
 
     docFrag = document.createDocumentFragment();
