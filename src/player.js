@@ -3,12 +3,10 @@
   this.Player = function() {
 
     var defaults = {
-        width: 480,
-        height: 270,
         playerId: 'video-player',
         videoId: null,
-        playButton: null,
-        pauseButton: null,
+        width: 480,
+        height: 270,
         autoPlay: null,
         controls: null,
         relatedVideos: 0,
@@ -28,10 +26,10 @@
     }
 
     // Global vars
+    wrap = this.options.wrap;
     playButton = this.options.playButton;
     playButtonText = this.options.playButtonText;
     pauseButton = this.options.pauseButton;
-    wrap = this.options.wrap;
     pauseButtonText = this.options.pauseButtonText;
     mute = this.options.mute;
 
