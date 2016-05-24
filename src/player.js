@@ -3,8 +3,8 @@
   this.Player = function() {
 
     var defaults = {
-        width: 600,
-        height: 400,
+        width: 480,
+        height: 270,
         playerId: 'video-player',
         videoId: null,
         playButton: null,
