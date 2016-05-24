@@ -20,4 +20,5 @@ autoPlay | int | null | Autoplay video on page load. Takes 1 or 0. Use 0 to turn
 controls | int | null | Show/ hide vide controls. Takes 1 or 0. Use 0 to turn controls off.
 relatedVideos | int | 0 | Show/ hide vide controls. Takes 1 or 0.
 showInfo | int | null | Show/ hide video title and Youtube header on video. Takes 1 or 0.
-wrap | boolean | null | Wrap Youtube video and custom controls in same div. Takes 1 or 0
+wrap | boolean | null | Wrap Youtube video and custom controls in same div. Takes 1 or 0.
+mute | boolean | null | Mute Youtube video. Takes 1 or 0.

@@ -14,14 +14,17 @@
         relatedVideos: 0,
         showInfo: null,
         wrap: null,
-        wrapClass: 'custom-player-wrapper'
+        wrapClass: 'custom-player-wrapper',
+        mute: null
     };
-
+  
     // Add our defaults above into a global array of options
     if (arguments[0] && typeof arguments[0] === 'object') {
       this.options = extendDefaults(defaults, arguments[0]);
     }
 
+    // Global vars
+    mute = this.options.mute;
   };
 
   Player.prototype.init = function() {
@@ -127,7 +130,11 @@
 
 
   // Events
-  Player.prototype._onPlayerReady = function( event ){};
+  Player.prototype._onPlayerReady = function( event ){
+    if( mute ) {
+      event.target.mute();
+    }
+  };
   Player.prototype._onStateChange = function( event ){};
 
 
