@@ -143,14 +143,19 @@
   function generateEl( el, className, id ) {
 
     var docFrag;
+    var self = this;
 
     docFrag = document.createDocumentFragment();
 
-    this.element = document.createElement( el );
-    this.element.className = className;
-    this.element.id = id;
+    self.element = document.createElement( el );
+    if( className ) {
+      self.element.className = className;
+    }
+    if( id ) {
+      self.element.id = id;
+    }
 
-    docFrag.appendChild( this.element );
+    docFrag.appendChild( self.element );
 
     document.body.appendChild( docFrag );
   }
