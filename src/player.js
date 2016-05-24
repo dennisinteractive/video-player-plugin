@@ -20,7 +20,7 @@
   
     // Add our defaults above into a global array of options
     if (arguments[0] && typeof arguments[0] === 'object') {
-      this.options = extendDefaults(defaults, arguments[0]);
+      this.options = extendDefaults( defaults, arguments[0] );
     }
 
     // Global vars
@@ -36,14 +36,14 @@
   Player.prototype.init = function() {
     var this_ = this;
 
-    generateEl('div', 'custom-player', this.options.playerId);
+    generateEl( 'div', 'custom-player', this.options.playerId );
 
     if( wrap ) {
-      wrapper = document.createElement('div');
+      wrapper = document.createElement( 'div' );
       wrapper.className = this_.options.wrapClass;
-      customPlayer = document.getElementById(this_.options.playerId);
-      wrapper.appendChild(customPlayer.cloneNode(true));
-      customPlayer.parentNode.replaceChild(wrapper, customPlayer);
+      customPlayer = document.getElementById( this_.options.playerId );
+      wrapper.appendChild( customPlayer.cloneNode( true ) );
+      customPlayer.parentNode.replaceChild( wrapper, customPlayer );
     }
 
     var callback = function() {
@@ -76,14 +76,14 @@
     if ('YT' in window) {
       callback();
     } else {
-      var tag = document.createElement('script');
+      var tag = document.createElement( 'script' );
 
       tag.src = 'https://www.youtube.com/iframe_api';
-      var firstScriptTag = document.getElementsByTagName('script')[0];
-      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+      var firstScriptTag = document.getElementsByTagName( 'script' )[0];
+      firstScriptTag.parentNode.insertBefore( tag, firstScriptTag );
 
       tag.onload = function() {
-        YT.ready(callback);
+        YT.ready( callback );
       };
     }
 
@@ -94,13 +94,13 @@
     var this_ = this;
     var customControls = 'custom-controls';
 
-    generateEl('div', customControls);
+    generateEl( 'div', customControls );
 
     if( wrap ) {
-      var controls = document.querySelector('.' + customControls),
-          wrapper = document.querySelector('.custom-player-wrapper');
+      var controls = document.querySelector( '.' + customControls ),
+          wrapper = document.querySelector( '.custom-player-wrapper' );
 
-      wrapper.appendChild(controls);
+      wrapper.appendChild( controls );
     }
 
     // Play button
@@ -108,7 +108,7 @@
       button = document.createElement( 'button' );
       button.innerHTML = 'Play';
       button.className = playButton;
-      document.querySelector('.' + customControls).appendChild( button );
+      document.querySelector( '.' + customControls ).appendChild( button );
 
       document.querySelector( '.' + playButton ).addEventListener( 'click', function() {
         this_.player.playVideo();
@@ -120,7 +120,7 @@
       button = document.createElement( 'button' );
       button.innerHTML = 'Pause';
       button.className = pauseButton;
-      document.querySelector('.' + customControls).appendChild( button );
+      document.querySelector( '.' + customControls ).appendChild( button );
 
       document.querySelector( '.' + pauseButton ).addEventListener( 'click', function() {
         this_.player.pauseVideo();
@@ -131,12 +131,12 @@
 
 
   // Events
-  Player.prototype._onPlayerReady = function( event ){
+  Player.prototype._onPlayerReady = function( event ) {
     if( mute ) {
       event.target.mute();
     }
   };
-  Player.prototype._onStateChange = function( event ){};
+  Player.prototype._onStateChange = function( event ) {};
 
 
   // Private Methods
@@ -167,8 +167,8 @@
   function extendDefaults( source, properties ) {
     var property;
     for ( property in properties ) {
-      if ( properties.hasOwnProperty(property) ) {
-        source[property] = properties[property];
+      if ( properties.hasOwnProperty( property ) ) {
+        source[ property ] = properties[ property ];
       }
     }
     return source;
