@@ -24,7 +24,11 @@
     }
 
     // Global vars
+    wrap = this.options.wrap;
     mute = this.options.mute;
+    playButton = this.options.playButton;
+    pauseButton = this.options.pauseButton;
+
   };
 
   Player.prototype.init = function() {
@@ -32,7 +36,6 @@
 
     createElement('div', 'custom-player', this.options.playerId);
 
-    var wrap = this.options.wrap;
     if( wrap ) {
       wrapper = document.createElement('div');
       wrapper.className = this_.options.wrapClass;
@@ -86,11 +89,7 @@
 
   // Controls
   Player.prototype.customControls = function() {
-    var this_ = this,
-        playButton = this.options.playButton,
-        pauseButton = this.options.pauseButton,
-        wrap = this.options.wrap;
-
+    var this_ = this;
 
     createElement('div', 'custom-controls');
 
