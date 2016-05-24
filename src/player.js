@@ -13,6 +13,7 @@
         controls: null,
         relatedVideos: 0,
         showInfo: null,
+        wrap: true
     };
 
     if (arguments[0] && typeof arguments[0] === 'object') {
@@ -25,7 +26,15 @@
 
     createElement('div', 'custom-player', this.options.playerId);
 
-    var this_ = this;
+    var wrap = this.options.wrap;
+    if( wrap ) {
+      wrapper = document.createElement('div');
+      wrapper.className = 'custom-player-wrapper';
+      customPlayer = document.getElementById(this_.options.playerId);
+      wrapper.appendChild(customPlayer.cloneNode(true));
+      customPlayer.parentNode.replaceChild(wrapper, customPlayer);
+    }
+
     var callback = function() {
 
       this_.player = new YT.Player(this_.options.playerId, {
@@ -77,7 +86,11 @@
     createElement('div', 'custom-controls');
 
 
+    if( wrap ) {
+      var controls = document.querySelector('.custom-controls'),
+          wrapper = document.querySelector('.custom-player-wrapper');
 
+      wrapper.appendChild(controls);
     }
 
 
@@ -94,6 +107,7 @@
     }
 
     // Pause video
+    if( pauseButton ) {
       button = document.createElement( 'button' );
       button.innerHTML = 'Pause';
       button.className = pauseButton;
