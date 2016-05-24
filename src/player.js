@@ -92,11 +92,12 @@
   // Controls
   Player.prototype.customControls = function() {
     var this_ = this;
+    var customControls = 'custom-controls';
 
-    generateEl('div', 'custom-controls');
+    generateEl('div', customControls);
 
     if( wrap ) {
-      var controls = document.querySelector('.custom-controls'),
+      var controls = document.querySelector('.' + customControls),
           wrapper = document.querySelector('.custom-player-wrapper');
 
       wrapper.appendChild(controls);
@@ -107,7 +108,7 @@
       button = document.createElement( 'button' );
       button.innerHTML = 'Play';
       button.className = playButton;
-      document.querySelector('.custom-controls').appendChild( button );
+      document.querySelector('.' + customControls).appendChild( button );
 
       document.querySelector( '.' + playButton ).addEventListener( 'click', function() {
         this_.player.playVideo();
@@ -119,7 +120,7 @@
       button = document.createElement( 'button' );
       button.innerHTML = 'Pause';
       button.className = pauseButton;
-      document.querySelector('.custom-controls').appendChild( button );
+      document.querySelector('.' + customControls).appendChild( button );
 
       document.querySelector( '.' + pauseButton ).addEventListener( 'click', function() {
         this_.player.pauseVideo();
