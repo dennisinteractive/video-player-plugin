@@ -15,6 +15,10 @@
         showInfo: null,
         wrap: null,
         wrapClass: 'custom-player-wrapper',
+        playButton: null,
+        playButtonText: 'Play',
+        pauseButton: null,
+        pauseButtonText: 'Pause',
         mute: null
     };
   
@@ -25,8 +29,10 @@
 
     // Global vars
     playButton = this.options.playButton;
+    playButtonText = this.options.playButtonText;
     pauseButton = this.options.pauseButton;
     wrap = this.options.wrap;
+    pauseButtonText = this.options.pauseButtonText;
     mute = this.options.mute;
 
     // Run Player.init()
@@ -107,7 +113,7 @@
     // Play button
     if( playButton ) {
       button = document.createElement( 'button' );
-      button.innerHTML = 'Play';
+      button.innerHTML = playButtonText;
       button.className = playButton;
       document.querySelector( '.' + customControls ).appendChild( button );
 
@@ -119,7 +125,7 @@
     // Pause video
     if( pauseButton ) {
       button = document.createElement( 'button' );
-      button.innerHTML = 'Pause';
+      button.innerHTML = pauseButtonText;
       button.className = pauseButton;
       document.querySelector( '.' + customControls ).appendChild( button );
 
