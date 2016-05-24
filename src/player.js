@@ -16,9 +16,11 @@
         wrap: true
     };
 
+    // Add our defaults above into a global array of options
     if (arguments[0] && typeof arguments[0] === 'object') {
       this.options = extendDefaults(defaults, arguments[0]);
     }
+
   };
 
   Player.prototype.init = function() {
