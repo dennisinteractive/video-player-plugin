@@ -49,17 +49,27 @@
 
     var callback = function() {
 
-      this_.player = new YT.Player(this_.options.playerId, {
-        videoId: this_.options.videoId,
-        height: this_.options.height,
-        width: this_.options.width,
-        playButton: this_.options.playButton,
-        pauseButton: this_.options.pauseButton,
+      var video = document.getElementById( this_.options.playerId );
+
+      if ( !video.hasAttribute( 'data-video-id' ) ) {
+        option = this_.options;
+      } else {
+        option = video.dataset;
+
+      }
+
+      // Youtube API
+      this_.player = new YT.Player(option.playerId, {
+        videoId: option.videoId,
+        height: option.height,
+        width: option.width,
+        playButton: option.playButton,
+        pauseButton: option.pauseButton,
         playerVars: {
-          autoplay: this_.options.autoPlay,
-          controls: this_.options.controls,
-          rel: this_.options.relatedVideos,
-          showinfo: this_.options.showInfo,
+          autoplay: option.autoPlay,
+          controls: option.controls,
+          rel: option.relatedVideos,
+          showinfo: option.showInfo,
         },
         events: {
           onReady: this_._onPlayerReady,
@@ -174,5 +184,6 @@
     }
     return source;
   }
+
 
 })();
