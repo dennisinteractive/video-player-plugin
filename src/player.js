@@ -13,7 +13,8 @@
         controls: null,
         relatedVideos: 0,
         showInfo: null,
-        wrap: true
+        wrap: true,
+        wrapClass: 'custom-player-wrapper'
     };
 
     // Add our defaults above into a global array of options
@@ -31,7 +32,7 @@
     var wrap = this.options.wrap;
     if( wrap ) {
       wrapper = document.createElement('div');
-      wrapper.className = 'custom-player-wrapper';
+      wrapper.className = this_.options.wrapClass;
       customPlayer = document.getElementById(this_.options.playerId);
       wrapper.appendChild(customPlayer.cloneNode(true));
       customPlayer.parentNode.replaceChild(wrapper, customPlayer);
