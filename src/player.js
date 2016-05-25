@@ -144,7 +144,7 @@
 
   // Events
   Player.prototype._onPlayerReady = function( event ) {
-    if ( mute ) {
+    if ( mute === '1') {
       event.target.mute();
     }
   };
