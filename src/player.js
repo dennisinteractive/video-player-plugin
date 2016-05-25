@@ -32,6 +32,7 @@
     this.pauseButton = this.options.pauseButton;
     this.pauseButtonText = this.options.pauseButtonText;
     mute = this.options.mute;
+    var usingDataAttr = false;
 
     // Run Player.init()
     this.init();
@@ -41,7 +42,11 @@
   Player.prototype.init = function() {
     var this_ = this;
 
-    generateEl( 'div', 'custom-player', this.options.playerId );
+    if( !usingDataAttr ) {
+      generateEl( 'div', this_.options.playerClass, this_.options.videoId );
+    } else {
+      playerData.id = this_.options.videoId;
+    }
 
     // Generate the wrapper
     if ( this.wrap ) {
@@ -182,11 +187,11 @@
 
   var playerData = document.querySelector( '[data-video-id]' );
   if ( playerData ) {
-    console.log('Found attribute');
+    var usingDataAttr = true;
+    // If it exists create a new Player
+    // and populate it with the rest of the data attributes
     var options = playerData.dataset,
         newPlayer = new Player(options);
-  } else {
-    console.log('No attribute found');
   }
 
 })();
