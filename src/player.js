@@ -26,11 +26,11 @@
     }
 
     // Global vars
-    wrap = this.options.wrap;
-    playButton = this.options.playButton;
-    playButtonText = this.options.playButtonText;
-    pauseButton = this.options.pauseButton;
-    pauseButtonText = this.options.pauseButtonText;
+    this.wrap = this.options.wrap;
+    this.playButton = this.options.playButton;
+    this.playButtonText = this.options.playButtonText;
+    this.pauseButton = this.options.pauseButton;
+    this.pauseButtonText = this.options.pauseButtonText;
     mute = this.options.mute;
 
     // Run Player.init()
@@ -43,12 +43,13 @@
 
     generateEl( 'div', 'custom-player', this.options.playerId );
 
-    if ( wrap ) {
-      wrapper = document.createElement( 'div' );
-      wrapper.className = this_.options.wrapClass;
-      customPlayer = document.getElementById( this_.options.playerId );
-      wrapper.appendChild( customPlayer.cloneNode( true ) );
-      customPlayer.parentNode.replaceChild( wrapper, customPlayer );
+    // Generate the wrapper
+    if ( this.wrap ) {
+      this.wrapper = document.createElement( 'div' );
+      this.wrapper.className = this_.options.wrapClass;
+      this.customPlayer = document.getElementById( this_.options.videoId );
+      this.wrapper.appendChild( this.customPlayer.cloneNode( true ) );
+      this.customPlayer.parentNode.replaceChild( this.wrapper, this.customPlayer );
     }
 
     var callback = function() {
@@ -72,7 +73,7 @@
       });
       
       // Load custom controls
-      if ( playButton || pauseButton ) {
+      if ( this_.playButton || this_.pauseButton ) {
         this_.customControls();
       }
     };
@@ -101,7 +102,7 @@
 
     generateEl( 'div', customControls );
 
-    if ( wrap ) {
+    if ( this_.wrap ) {
       var controls = document.querySelector( '.' + customControls ),
           wrapper = document.querySelector( '.custom-player-wrapper' );
 
@@ -109,31 +110,32 @@
     }
 
     // Play button
-    if ( playButton ) {
-      button = document.createElement( 'button' );
-      button.innerHTML = playButtonText;
-      button.className = playButton;
-      document.querySelector( '.' + customControls ).appendChild( button );
+    if ( this_.playButton ) {
+      var playButtonEl;
+      playButtonEl = document.createElement( 'button' );
+      playButtonEl.innerHTML = this.playButtonText;
+      playButtonEl.className = this.playButton;
+      document.querySelector( '.' + customControls ).appendChild( playButtonEl );
 
-      document.querySelector( '.' + playButton ).addEventListener( 'click', function() {
+      document.querySelector( '.' + this.playButton ).addEventListener( 'click', function() {
         this_.player.playVideo();
       });
     }
 
     // Pause video
-    if ( pauseButton ) {
-      button = document.createElement( 'button' );
-      button.innerHTML = pauseButtonText;
-      button.className = pauseButton;
-      document.querySelector( '.' + customControls ).appendChild( button );
+    if ( this_.pauseButton ) {
+      var pauseButtonEl;
+      pauseButtonEl = document.createElement( 'button' );
+      pauseButtonEl.innerHTML = this.pauseButtonText;
+      pauseButtonEl.className = this.pauseButton;
+      document.querySelector( '.' + customControls ).appendChild( pauseButtonEl );
 
-      document.querySelector( '.' + pauseButton ).addEventListener( 'click', function() {
+      document.querySelector( '.' + this.pauseButton ).addEventListener( 'click', function() {
         this_.player.pauseVideo();
       });
     }
 
   };
-
 
   // Events
   Player.prototype._onPlayerReady = function( event ) {
