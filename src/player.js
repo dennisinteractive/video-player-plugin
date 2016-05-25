@@ -45,7 +45,7 @@
     var this_ = this;
 
     if( !usingDataAttr ) {
-      generateEl( 'div', this_.options.playerClass, this_.options.videoId );
+      generateEl( 'div', this_.options.videoId, this_.options.playerClass );
     } else {
       playerData.id = this_.options.videoId;
     }
@@ -158,18 +158,17 @@
 
   // Build the necessary markup
   // and inject it into the document if needed
-  function generateEl( el, className, id ) {
-
+  function generateEl( el, id, className ) {
     var docFrag, element;
 
     docFrag = document.createDocumentFragment();
-
     element = document.createElement( el );
-    if ( className ) {
-      element.className = className;
-    }
+
     if ( id ) {
       element.id = id;
+    }
+    if ( className ) {
+      element.className = className;
     }
 
     docFrag.appendChild( element );
