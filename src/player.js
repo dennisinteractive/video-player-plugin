@@ -157,20 +157,19 @@
   // and inject it into the document if needed
   function generateEl( el, className, id ) {
 
-    var docFrag;
-    var self = this;
+    var docFrag, element;
 
     docFrag = document.createDocumentFragment();
 
-    self.element = document.createElement( el );
+    element = document.createElement( el );
     if ( className ) {
-      self.element.className = className;
+      element.className = className;
     }
     if ( id ) {
-      self.element.id = id;
+      element.id = id;
     }
 
-    docFrag.appendChild( self.element );
+    docFrag.appendChild( element );
 
     document.body.appendChild( docFrag );
   }
