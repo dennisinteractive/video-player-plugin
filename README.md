@@ -11,9 +11,7 @@ Video player plugin that uses the Youtube api
 -- or --
 
 ```HTML
-  <div class="custom-player"
-       data-video-id="JXqTxFkZhao"
-  ></div>
+  <div class="custom-player" data-video-id="JXqTxFkZhao"></div>
 ```
 
 ## Settings
