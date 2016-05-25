@@ -3,7 +3,7 @@ Video player plugin that uses the Youtube api
 
 ## Usage
 
-Install with [Bower](http://bower.io): `bower install video-player-plugin`.
+Install with [Bower](http://bower.io): `$ bower install video-player-plugin --save`.
 
 ```javascript
   var myVideo = new Player({
