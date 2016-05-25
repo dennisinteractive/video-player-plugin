@@ -3,8 +3,8 @@
   this.Player = function() {
 
     var defaults = {
-        playerId: 'video-player',
         videoId: null,
+        playerId: this.videoId,
         width: 480,
         height: 270,
         autoPlay: null,
@@ -53,8 +53,7 @@
     }
 
     var callback = function() {
-
-      this_.player = new YT.Player(this_.options.playerId, {
+      this_.player = new YT.Player(this_.options.videoId, {
         videoId: this_.options.videoId,
         height: this_.options.height,
         width: this_.options.width,
