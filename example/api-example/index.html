@@ -7,27 +7,23 @@
   <link href="../monokai-sublime.css" rel="stylesheet">
   <script src="../../src/player.js"></script>
 </head>
-<body>
+<body style="max-width: 70%; margin: 0 auto; text-align: center;">
 
-  <div class="container">
+  <h1>Using the API</h1>
 
-    <h1>Using the API</h1>
-
-    <script>
+  <script>
+    var myVideo = new Player({
+      videoId: 'YrblkMd-KMs'
+    });
+  </script>
+  <p>All you need is the ID of the video you want to display, and you're done.</p>
+  <pre>
+    <code class="javascript">
       var myVideo = new Player({
         videoId: 'YrblkMd-KMs'
       });
-    </script>
-    <p>All you need is the ID of the video you want to display, and you're done.</p>
-    <pre>
-      <code class="javascript">
-        var myVideo = new Player({
-          videoId: 'YrblkMd-KMs'
-        });
-      </code>
-    </pre>
-
-  </div>
+    </code>
+  </pre>
 
   <script type="text/javascript" src="../highlight.pack.js"></script>
   <script>hljs.initHighlightingOnLoad();</script>

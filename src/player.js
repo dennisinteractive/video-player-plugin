@@ -17,7 +17,8 @@
         playButtonText: 'Play',
         pauseButton: null,
         pauseButtonText: 'Pause',
-        mute: null
+        mute: null,
+        placement: null
     };
   
     // Add our defaults above into a global array of options
@@ -32,6 +33,7 @@
     this.pauseButton = this.options.pauseButton;
     this.pauseButtonText = this.options.pauseButtonText;
     mute = this.options.mute;
+    placement = this.options.placement;
     var usingDataAttr = false;
 
     // Run Player.init()
@@ -172,7 +174,12 @@
 
     docFrag.appendChild( element );
 
-    document.body.appendChild( docFrag );
+    if ( placement !== null ) {
+      var selector = document.querySelector( '.' + placement );
+      selector.appendChild( docFrag );
+    } else {
+      document.body.appendChild( docFrag );
+    }
   }
 
   // Utility method to extend defaults with user options
