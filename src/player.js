@@ -43,7 +43,7 @@
 
     generateEl( 'div', 'custom-player', this.options.playerId );
 
-    if( wrap ) {
+    if ( wrap ) {
       wrapper = document.createElement( 'div' );
       wrapper.className = this_.options.wrapClass;
       customPlayer = document.getElementById( this_.options.playerId );
@@ -72,7 +72,7 @@
       });
       
       // Load custom controls
-      if( playButton || pauseButton ) {
+      if ( playButton || pauseButton ) {
         this_.customControls();
       }
     };
@@ -101,7 +101,7 @@
 
     generateEl( 'div', customControls );
 
-    if( wrap ) {
+    if ( wrap ) {
       var controls = document.querySelector( '.' + customControls ),
           wrapper = document.querySelector( '.custom-player-wrapper' );
 
@@ -109,7 +109,7 @@
     }
 
     // Play button
-    if( playButton ) {
+    if ( playButton ) {
       button = document.createElement( 'button' );
       button.innerHTML = playButtonText;
       button.className = playButton;
@@ -121,7 +121,7 @@
     }
 
     // Pause video
-    if( pauseButton ) {
+    if ( pauseButton ) {
       button = document.createElement( 'button' );
       button.innerHTML = pauseButtonText;
       button.className = pauseButton;
@@ -137,7 +137,7 @@
 
   // Events
   Player.prototype._onPlayerReady = function( event ) {
-    if( mute ) {
+    if ( mute ) {
       event.target.mute();
     }
   };
@@ -156,10 +156,10 @@
     docFrag = document.createDocumentFragment();
 
     self.element = document.createElement( el );
-    if( className ) {
+    if ( className ) {
       self.element.className = className;
     }
-    if( id ) {
+    if ( id ) {
       self.element.id = id;
     }
 
