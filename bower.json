@@ -1,0 +1,21 @@
+{
+  "name": "video-player-plugin",
+  "description": "A plugin to utilise the Youtube api",
+  "main": "src/video.js",
+  "authors": [
+    "Matt Coleman"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "video",
+    "player"
+  ],
+  "homepage": "https://github.com/matt3188/video-player-plugin",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
