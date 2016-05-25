@@ -179,4 +179,13 @@
     return source;
   }
 
+  var playerData = document.querySelector( '[data-video-id]' );
+  if ( playerData ) {
+    console.log('Found attribute');
+    var options = playerData.dataset,
+        newPlayer = new Player(options);
+  } else {
+    console.log('No attribute found');
+  }
+
 })();
