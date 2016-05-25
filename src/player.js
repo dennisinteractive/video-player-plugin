@@ -4,7 +4,6 @@
 
     var defaults = {
         videoId: null,
-        playerId: this.videoId,
         playerClass: 'custom-player',
         width: 480,
         height: 270,
