@@ -107,6 +107,8 @@
 
     generateEl( 'div', customControls );
 
+    // Find the first custom-controls element
+    // TODO: Look for multiple elements on the page
     if ( this_.wrap ) {
       var controls = document.querySelector( '.' + customControls ),
           wrapper = document.querySelector( '.custom-player-wrapper' );
@@ -185,6 +187,8 @@
     return source;
   }
 
+  // Look for the first element that contains data-video-id
+  // TODO: Look for multiple data-video-id's
   var playerData = document.querySelector( '[data-video-id]' );
   if ( playerData ) {
     var usingDataAttr = true;
