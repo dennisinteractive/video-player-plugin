@@ -8,6 +8,14 @@ Video player plugin that uses the Youtube api
   });
 ```
 
+-- or --
+
+```HTML
+  <div class="custom-player"
+       data-video-id="JXqTxFkZhao"
+  ></div>
+```
+
 ## Settings
 
 Option | Type | Default | Description
