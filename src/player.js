@@ -198,10 +198,20 @@
 
     if ( this.placement !== null ) {
       var selector = document.querySelector( this.placement );
+      if ( !selector ) { throw new selectorError(selector); }
       selector.appendChild( docFrag );
     } else {
       document.body.appendChild( docFrag );
     }
+
+    function selectorError( value ) {
+      this.message = 'Make sure your selector is on the page'
+      this.toString = function() {
+        return this.value + ' ' + this.message;
+      };
+    }
+
+    return element;
   }
 
   // Utility method to extend defaults with user options
