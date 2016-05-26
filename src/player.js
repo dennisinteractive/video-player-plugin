@@ -129,7 +129,7 @@
     var customControlsClass = 'custom-controls';
     var customControlsSelector = '.' + customControlsClass;
 
-    this.generateEl( 'div', null, customControlsClass );
+    this.controls = this.generateEl( 'div', null, customControlsClass );
 
     // Find the first custom-controls element
     // TODO: Look for multiple elements on the page
@@ -146,9 +146,9 @@
       playButtonEl = document.createElement( 'button' );
       playButtonEl.innerHTML = this_.options.playButtonText;
       playButtonEl.className = this_.options.playButton;
-      document.querySelector( customControlsSelector ).appendChild( playButtonEl );
+      this.controls.appendChild( playButtonEl );
 
-      document.querySelector( '.' + this.playButton ).addEventListener( 'click', function() {
+      document.querySelector( '.' + this_.options.playButton ).addEventListener( 'click', function() {
         this_.player.playVideo();
       });
     }
@@ -160,7 +160,7 @@
       pauseButtonEl.innerHTML = this_.options.pauseButtonText;
       pauseButtonEl.className = this_.options.pauseButton;
 
-      document.querySelector( customControlsSelector ).appendChild( pauseButtonEl );
+      this.controls.appendChild( pauseButtonEl );
       document.querySelector( '.' + this_.options.pauseButton ).addEventListener( 'click', function() {
         this_.player.pauseVideo();
       });
