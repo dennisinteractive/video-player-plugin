@@ -3,5 +3,5 @@ Video player plugin has many features available to it some of which are document
 
 ##Examples
 
-- [Basic example using HTML data attributes](basic-example/index.html)
 - [Basic example](api-example/index.html)
+- [Basic example using HTML data attributes](basic-example/index.html)
