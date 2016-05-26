@@ -23,15 +23,9 @@
     };
   
     // Add our defaults above into a global array of options
-    if (arguments[0] && typeof arguments[0] === 'object') {
+    if ( arguments[0] && typeof arguments[0] === 'object' ) {
       this.options = extendDefaults( defaults, arguments[0] );
     }
-
-    // Global vars
-    this.wrap = this.options.wrap;
-    this.extraClass = this.options.extraClass;
-    this.mute = this.options.mute;
-    this.placement = this.options.placement;
 
     var usingDataAttr = false;
 
@@ -56,10 +50,11 @@
       this.generateEl( 'div', this_.options.videoId, this_.options.playerClass + addExtraClass );
     } else {
       playerData.id = this_.options.videoId;
+      console.log(this_.options)
     }
 
     // Generate the wrapper
-    if ( this.wrap ) {
+    if ( this_.options.wrap ) {
       this.wrapper = document.createElement( 'div' );
       this.wrapper.className = this_.options.wrapClass;
       this.customPlayer = document.getElementById( this_.options.videoId );
@@ -170,7 +165,7 @@
 
   // Events
   Player.prototype._onPlayerReady = function( event ) {
-    if ( this.mute === 1) {
+    if ( this.options.mute === 1) {
       event.target.mute();
     }
   };
@@ -196,8 +191,8 @@
 
     docFrag.appendChild( element );
 
-    if ( this.placement !== null ) {
-      var selector = document.querySelector( this.placement );
+    if ( this.options.placement !== null ) {
+      var selector = document.querySelector( this.options.placement );
       if ( !selector ) { throw new selectorError(selector); }
       selector.appendChild( docFrag );
     } else {
