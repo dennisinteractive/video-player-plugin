@@ -5,6 +5,7 @@
     var defaults = {
         videoId: null,
         playerClass: 'custom-player',
+        extraClass: null,
         width: 480,
         height: 270,
         autoPlay: null,
@@ -32,6 +33,7 @@
     this.playButtonText = this.options.playButtonText;
     this.pauseButton = this.options.pauseButton;
     this.pauseButtonText = this.options.pauseButtonText;
+    this.extraClass = this.options.extraClass;
     mute = this.options.mute;
     placement = this.options.placement;
     var usingDataAttr = false;
@@ -45,7 +47,12 @@
     var this_ = this;
 
     if( !usingDataAttr ) {
-      generateEl( 'div', this_.options.videoId, this_.options.playerClass );
+      // If any extraClass names have been added add them
+      var extraClass = this_.options.extraClass,
+          classCheck = extraClass === null,
+          addExtraClass = classCheck ? '' : ' ' + extraClass;
+
+      generateEl( 'div', this_.options.videoId, this_.options.playerClass + addExtraClass );
     } else {
       playerData.id = this_.options.videoId;
     }
