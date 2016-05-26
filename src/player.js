@@ -34,7 +34,7 @@
     this.pauseButton = this.options.pauseButton;
     this.pauseButtonText = this.options.pauseButtonText;
     this.extraClass = this.options.extraClass;
-    mute = this.options.mute;
+    this.mute = this.options.mute;
     this.placement = this.options.placement;
 
     var usingDataAttr = false;
@@ -173,7 +173,7 @@
 
   // Events
   Player.prototype._onPlayerReady = function( event ) {
-    if ( mute === '1') {
+    if ( this.mute === 1) {
       event.target.mute();
     }
   };
