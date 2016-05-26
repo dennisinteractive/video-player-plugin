@@ -39,8 +39,12 @@
 
     var usingDataAttr = false;
 
-    // Run Player.init()
-    this.init();
+    if( document.readyState !== 'complete' ) {
+      document.addEventListener('DOMContentLoaded', (this.init).bind(this), false);
+    } else {
+      // Run Player.init()
+      this.init();
+    }
 
   };
 
