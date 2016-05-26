@@ -43,6 +43,7 @@ placement | string | null | Specify where you would like the video to appear. Af
 
 - Ability to place more than one video on the same page
     (Currently works when using the API)
+- Allow users to hook into the Youtube events and create custom ones if needed
 
 ---
 &copy; 2016, produced and maintained for [Dennis Digital][dennis], free under the [MIT License][license]
