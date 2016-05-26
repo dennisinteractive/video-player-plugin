@@ -29,10 +29,6 @@
 
     // Global vars
     this.wrap = this.options.wrap;
-    this.playButton = this.options.playButton;
-    this.playButtonText = this.options.playButtonText;
-    this.pauseButton = this.options.pauseButton;
-    this.pauseButtonText = this.options.pauseButtonText;
     this.extraClass = this.options.extraClass;
     this.mute = this.options.mute;
     this.placement = this.options.placement;
@@ -91,7 +87,7 @@
       });
       
       // Load custom controls
-      if ( this_.playButton || this_.pauseButton ) {
+      if ( this_.options.playButton || this_.options.pauseButton ) {
         this_.customControls();
       }
     }).bind(this);
@@ -136,20 +132,20 @@
 
     // Find the first custom-controls element
     // TODO: Look for multiple elements on the page
-    if ( this_.wrap ) {
       var controls = document.querySelector( '.' + customControls ),
           wrapper = document.querySelector( '.custom-player-wrapper' );
+    if ( this_.options.wrap ) {
 
       wrapper.appendChild( controls );
     }
 
     // Play button
-    if ( this_.playButton ) {
+    if ( this_.options.playButton ) {
       var playButtonEl;
       playButtonEl = document.createElement( 'button' );
-      playButtonEl.innerHTML = this.playButtonText;
-      playButtonEl.className = this.playButton;
       document.querySelector( '.' + customControls ).appendChild( playButtonEl );
+      playButtonEl.innerHTML = this_.options.playButtonText;
+      playButtonEl.className = this_.options.playButton;
 
       document.querySelector( '.' + this.playButton ).addEventListener( 'click', function() {
         this_.player.playVideo();
@@ -157,14 +153,14 @@
     }
 
     // Pause video
-    if ( this_.pauseButton ) {
+    if ( this_.options.pauseButton ) {
       var pauseButtonEl;
       pauseButtonEl = document.createElement( 'button' );
-      pauseButtonEl.innerHTML = this.pauseButtonText;
-      pauseButtonEl.className = this.pauseButton;
       document.querySelector( '.' + customControls ).appendChild( pauseButtonEl );
+      pauseButtonEl.innerHTML = this_.options.pauseButtonText;
+      pauseButtonEl.className = this_.options.pauseButton;
 
-      document.querySelector( '.' + this.pauseButton ).addEventListener( 'click', function() {
+      document.querySelector( '.' + this_.options.pauseButton ).addEventListener( 'click', function() {
         this_.player.pauseVideo();
       });
     }
