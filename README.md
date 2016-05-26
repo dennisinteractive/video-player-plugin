@@ -38,7 +38,8 @@ pauseButtonText | string | 'Pause' | Customise pause button text.
 placement | string | null | Specify where you would like the video to appear. After body tag by default.
 
 ---
-&copy; 2016 produced and maintained for Dennis Digital, free under the [MIT License][license]
+&copy; 2016 produced and maintained for [Dennis Digital][dennis], free under the [MIT License][license]
 
 
 [license]:https://raw.githubusercontent.com/matt3188/video-player-plugin/master/LICENSE
+[dennis]:http://www.dennis.co.uk/
