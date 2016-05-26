@@ -126,15 +126,16 @@
   // Controls
   Player.prototype.customControls = function() {
     var this_ = this;
-    var customControls = 'custom-controls';
+    var customControlsClass = 'custom-controls';
+    var customControlsSelector = '.' + customControlsClass;
 
-    this.generateEl( 'div', customControls );
+    this.generateEl( 'div', null, customControlsClass );
 
     // Find the first custom-controls element
     // TODO: Look for multiple elements on the page
-      var controls = document.querySelector( '.' + customControls ),
-          wrapper = document.querySelector( '.custom-player-wrapper' );
     if ( this_.options.wrap ) {
+      var controls = document.querySelector( customControlsSelector ),
+          wrapper = document.querySelector( '.' + this_.options.wrapClass );
 
       wrapper.appendChild( controls );
     }
@@ -143,9 +144,9 @@
     if ( this_.options.playButton ) {
       var playButtonEl;
       playButtonEl = document.createElement( 'button' );
-      document.querySelector( '.' + customControls ).appendChild( playButtonEl );
       playButtonEl.innerHTML = this_.options.playButtonText;
       playButtonEl.className = this_.options.playButton;
+      document.querySelector( customControlsSelector ).appendChild( playButtonEl );
 
       document.querySelector( '.' + this.playButton ).addEventListener( 'click', function() {
         this_.player.playVideo();
@@ -156,10 +157,10 @@
     if ( this_.options.pauseButton ) {
       var pauseButtonEl;
       pauseButtonEl = document.createElement( 'button' );
-      document.querySelector( '.' + customControls ).appendChild( pauseButtonEl );
       pauseButtonEl.innerHTML = this_.options.pauseButtonText;
       pauseButtonEl.className = this_.options.pauseButton;
 
+      document.querySelector( customControlsSelector ).appendChild( pauseButtonEl );
       document.querySelector( '.' + this_.options.pauseButton ).addEventListener( 'click', function() {
         this_.player.pauseVideo();
       });
