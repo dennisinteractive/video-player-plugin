@@ -38,6 +38,12 @@ pauseButton | string | null | Custom pause button selector. Creates button and a
 pauseButtonText | string | 'Pause' | Customise pause button text.
 placement | string | null | Specify where you would like the video to appear. After body tag by default.
 
+
+## Road map
+
+- Ability to place more than one video on the same page
+    (Currently works when using the API)
+
 ---
 &copy; 2016, produced and maintained for [Dennis Digital][dennis], free under the [MIT License][license]
 
