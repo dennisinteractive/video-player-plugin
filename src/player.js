@@ -98,17 +98,31 @@
 
     // Test if the youtube api is loaded
     if ('YT' in window) {
-      callback();
+      if (window.YT.loaded === 0) {
+        if (window.onYouTubePlayerAPIReady) {
+          var oldonYouTubePlayerAPIReady = window.onYouTubePlayerAPIReady;
+        }
+        window.onYouTubePlayerAPIReady = function() {
+          if (window.onYouTubePlayerAPIReady) { oldonYouTubePlayerAPIReady(); }
+          callback();
+        };
+      } else {
+        callback();
+      }
     } else {
+      window.YT = {
+        loaded: 0
+      };
+
+      window.onYouTubePlayerAPIReady = function() {
+        callback();
+      };
+
       var tag = document.createElement( 'script' );
 
       tag.src = 'https://www.youtube.com/iframe_api';
       var firstScriptTag = document.getElementsByTagName( 'script' )[0];
       firstScriptTag.parentNode.insertBefore( tag, firstScriptTag );
-
-      tag.onload = function() {
-        YT.ready( callback );
-      };
     }
 
   };
