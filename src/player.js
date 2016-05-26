@@ -71,7 +71,7 @@
       this.customPlayer.parentNode.replaceChild( this.wrapper, this.customPlayer );
     }
 
-    var callback = function() {
+    var callback = (function() {
       this_.player = new YT.Player(this_.options.videoId, {
         videoId: this_.options.videoId,
         height: this_.options.height,
@@ -85,8 +85,8 @@
           showinfo: this_.options.showInfo,
         },
         events: {
-          onReady: this_._onPlayerReady,
-          onStateChange: this_._onStateChange
+          onReady: (this_._onPlayerReady).bind(this),
+          onStateChange: (this_._onStateChange).bind(this)
         }
       });
       
@@ -94,7 +94,7 @@
       if ( this_.playButton || this_.pauseButton ) {
         this_.customControls();
       }
-    };
+    }).bind(this);
 
     // Test if the youtube api is loaded
     if ('YT' in window) {
