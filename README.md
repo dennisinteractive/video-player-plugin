@@ -22,6 +22,7 @@ Install with [Bower](http://bower.io): `$ bower install video-player-plugin --sa
 Option | Type | Default | Description
 ------ | ---- | ------- | -----------
 videoId | string | null | Sets ID of video to be displayed.
+extraClass | string | null | Sets any extra classes needed.
 width | int | 480 | Sets width of video.
 height | int | 270 | Sets height of video.
 autoPlay | int | null | Autoplay video on page load. Takes 1 or 0. Use 0 to turn autoPlay off.
