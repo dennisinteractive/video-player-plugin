@@ -35,7 +35,8 @@
     this.pauseButtonText = this.options.pauseButtonText;
     this.extraClass = this.options.extraClass;
     mute = this.options.mute;
-    placement = this.options.placement;
+    this.placement = this.options.placement;
+
     var usingDataAttr = false;
 
     // Run Player.init()
@@ -52,7 +53,7 @@
           classCheck = extraClass === null,
           addExtraClass = classCheck ? '' : ' ' + extraClass;
 
-      generateEl( 'div', this_.options.videoId, this_.options.playerClass + addExtraClass );
+      this.generateEl( 'div', this_.options.videoId, this_.options.playerClass + addExtraClass );
     } else {
       playerData.id = this_.options.videoId;
     }
@@ -113,7 +114,7 @@
     var this_ = this;
     var customControls = 'custom-controls';
 
-    generateEl( 'div', customControls );
+    this.generateEl( 'div', customControls );
 
     // Find the first custom-controls element
     // TODO: Look for multiple elements on the page
@@ -165,7 +166,7 @@
 
   // Build the necessary markup
   // and inject it into the document if needed
-  function generateEl( el, id, className ) {
+  Player.prototype.generateEl = function( el, id, className ) {
     var docFrag, element;
 
     docFrag = document.createDocumentFragment();
@@ -180,8 +181,8 @@
 
     docFrag.appendChild( element );
 
-    if ( placement !== null ) {
-      var selector = document.querySelector( '.' + placement );
+    if ( this.placement !== null ) {
+      var selector = document.querySelector( this.placement );
       selector.appendChild( docFrag );
     } else {
       document.body.appendChild( docFrag );
