@@ -27,8 +27,6 @@
       this.options = extendDefaults( defaults, arguments[0] );
     }
 
-    var usingDataAttr = false;
-
     if( document.readyState !== 'complete' ) {
       document.addEventListener('DOMContentLoaded', (this.init).bind(this), false);
     } else {
@@ -41,12 +39,12 @@
   Player.prototype.init = function() {
     var this_ = this;
 
-    if( !usingDataAttr ) {
     // If any extraClass names have been added add them
     var extraClass = this_.options.extraClass,
         classCheck = extraClass === null,
         addExtraClass = classCheck ? '' : ' ' + extraClass;
 
+    if ( !document.getElementById( this_.options.videoId ) ) {
       this.generateEl( 'div', this_.options.videoId, this_.options.playerClass + addExtraClass );
     }
 
@@ -225,6 +223,7 @@
   [].slice.call(playerData).forEach(function( vid ) {
     var options = vid.dataset;
     options.element = vid;
+    vid.id = vid.dataset.videoId;
     standaloneVideos.push(new Player(options));
   });
 
