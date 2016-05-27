@@ -195,7 +195,7 @@
     }
 
     function selectorError( value ) {
-      this.message = 'Make sure your selector is on the page'
+      this.message = 'Make sure your selector is on the page';
       this.toString = function() {
         return this.value + ' ' + this.message;
       };
