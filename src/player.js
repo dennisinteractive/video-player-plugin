@@ -42,15 +42,12 @@
     var this_ = this;
 
     if( !usingDataAttr ) {
-      // If any extraClass names have been added add them
-      var extraClass = this_.options.extraClass,
-          classCheck = extraClass === null,
-          addExtraClass = classCheck ? '' : ' ' + extraClass;
+    // If any extraClass names have been added add them
+    var extraClass = this_.options.extraClass,
+        classCheck = extraClass === null,
+        addExtraClass = classCheck ? '' : ' ' + extraClass;
 
       this.generateEl( 'div', this_.options.videoId, this_.options.playerClass + addExtraClass );
-    } else {
-      playerData.id = this_.options.videoId;
-      console.log(this_.options)
     }
 
     // Generate the wrapper
@@ -207,7 +204,7 @@
     }
 
     return element;
-  }
+  };
 
   // Utility method to extend defaults with user options
   function extendDefaults( source, properties ) {
@@ -220,15 +217,17 @@
     return source;
   }
 
-  // Look for the first element that contains data-video-id
-  // TODO: Look for multiple data-video-id's
-  var playerData = document.querySelector( '[data-video-id]' );
-  if ( playerData ) {
-    var usingDataAttr = true;
-    // If it exists create a new Player
-    // and populate it with the rest of the data attributes
-    var options = playerData.dataset,
-        newPlayer = new Player(options);
-  }
+  // Look for all elements that has a data-video-id
+  // and populate an array
+  var playerData = document.querySelectorAll( '[data-video-id]' );
+  var standaloneVideos = [];
+
+  [].slice.call(playerData).forEach(function( vid ) {
+    var options = vid.dataset;
+    options.element = vid;
+    standaloneVideos.push(new Player(options));
+  });
+
+  return standaloneVideos;
 
 })();
