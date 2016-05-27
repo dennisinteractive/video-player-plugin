@@ -41,8 +41,8 @@ placement | string | null | Specify where you would like the video to appear. Af
 
 ## Road map
 
-- Ability to place more than one video on the same page
-    (Currently works when using the API)
+- ~~Ability to place more than one video on the same page
+    (Currently works when using the API)~~
 - Allow users to hook into the Youtube events and create custom ones if needed
 
 ---
