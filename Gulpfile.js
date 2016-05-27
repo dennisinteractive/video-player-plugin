@@ -6,7 +6,7 @@ var rename = require("gulp-rename");
 var jshint = require('gulp-jshint');
 var gulp   = require('gulp');
 
-gulp.task('compress', function() {
+gulp.task('compress', ['copy'], function() {
   return gulp.src('src/*.js')
     .pipe(uglify())
     .pipe(rename({
@@ -21,3 +21,7 @@ gulp.task('lint', function() {
     .pipe(jshint.reporter('jshint-stylish'));
 });
 
+gulp.task('copy', function() {
+   return gulp.src('src/player.js')
+   .pipe(gulp.dest('dist'));
+});
