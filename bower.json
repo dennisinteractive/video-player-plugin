@@ -1,7 +1,7 @@
 {
   "name": "video-player-plugin",
   "description": "A plugin to utilise the Youtube api",
-  "main": "dist/player.min.js",
+  "main": "dist/player.js",
   "authors": [
     "Matt Coleman"
   ],
