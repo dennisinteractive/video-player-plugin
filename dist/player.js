@@ -162,11 +162,13 @@
   };
 
   // Events
+  // Player ready
   Player.prototype._onPlayerReady = function( event ) {
     if ( this.options.mute === 1) {
       event.target.mute();
     }
   };
+  // Player state change
   Player.prototype._onStateChange = function( event ) {};
 
 
