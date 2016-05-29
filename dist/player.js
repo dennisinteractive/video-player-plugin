@@ -50,7 +50,7 @@
     }
 
     // Generate the wrapper
-    if ( this_.options.wrap ) {
+    if ( this_.options.wrap || this_.options.wrapClass ) {
       this.wrapper = document.createElement( 'div' );
       this.wrapper.className = this_.options.wrapClass;
       this.customPlayer = document.getElementById( this_.options.videoId );
