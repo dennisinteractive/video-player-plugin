@@ -64,8 +64,6 @@
         videoId: this_.options.videoId,
         height: this_.options.height,
         width: this_.options.width,
-        playButton: this_.options.playButton,
-        pauseButton: this_.options.pauseButton,
         playerVars: {
           autoplay: this_.options.autoPlay,
           controls: this_.options.controls,
