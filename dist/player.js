@@ -28,7 +28,7 @@
     }
 
     if( document.readyState !== 'complete' ) {
-      document.addEventListener('DOMContentLoaded', (this.init).bind(this), false);
+      document.addEventListener( 'DOMContentLoaded', ( this.init ).bind( this ), false);
     } else {
       // Run Player.init()
       this.init();
@@ -72,8 +72,8 @@
           showinfo: this_.options.showInfo,
         },
         events: {
-          onReady: (this_._onPlayerReady).bind(this),
-          onStateChange: (this_._onStateChange).bind(this)
+          onReady: ( this_._onPlayerReady ).bind( this ),
+          onStateChange: ( this_._onStateChange ).bind( this )
         }
       });
       
@@ -84,13 +84,15 @@
     }).bind(this);
 
     // Test if the youtube api is loaded
-    if ('YT' in window) {
-      if (window.YT.loaded === 0) {
-        if (window.onYouTubePlayerAPIReady) {
+    if ( 'YT' in window ) {
+      if ( window.YT.loaded === 0 ) {
+        if ( window.onYouTubePlayerAPIReady ) {
           var oldonYouTubePlayerAPIReady = window.onYouTubePlayerAPIReady;
         }
         window.onYouTubePlayerAPIReady = function() {
-          if (window.onYouTubePlayerAPIReady) { oldonYouTubePlayerAPIReady(); }
+          if ( window.onYouTubePlayerAPIReady ) {
+            oldonYouTubePlayerAPIReady();
+          }
           callback();
         };
       } else {
