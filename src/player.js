@@ -135,7 +135,7 @@
     }
 
     // Play button
-    if ( this_.options.playButton ) {
+    if ( this_.options.playButton || this_.options.playButtonClass ) {
       var playButtonEl;
 
       playButtonEl = document.createElement( 'button' );
@@ -150,7 +150,7 @@
     }
 
     // Pause video
-    if ( this_.options.pauseButton ) {
+    if ( this_.options.pauseButton || this_.options.pauseButtonClass ) {
       var pauseButtonEl;
 
       pauseButtonEl = document.createElement( 'button' );
