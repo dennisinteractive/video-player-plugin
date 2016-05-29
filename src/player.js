@@ -15,6 +15,7 @@
         wrap: null,
         wrapClass: 'custom-player-wrapper',
         playButton: null,
+        playButtonClass: 'play-button',
         playButtonText: 'Play',
         pauseButton: null,
         pauseButtonText: 'Pause',
@@ -37,6 +38,7 @@
   };
 
   Player.prototype.init = function() {
+
     var this_ = this;
 
     // If any extraClass names have been added add them
@@ -49,7 +51,7 @@
     }
 
     // Generate the wrapper
-    if ( this_.options.wrap ) {
+    if ( this_.options.wrap || this_.options.wrapClass ) {
       this.wrapper = document.createElement( 'div' );
       this.wrapper.className = this_.options.wrapClass;
       this.customPlayer = document.getElementById( this_.options.videoId );
@@ -57,8 +59,8 @@
       this.customPlayer.parentNode.replaceChild( this.wrapper, this.customPlayer );
     }
 
-    var callback = (function() {
-      this_.player = new YT.Player(this_.options.videoId, {
+    var callback = ( function() {
+      this_.player = new YT.Player( this_.options.videoId, {
         videoId: this_.options.videoId,
         height: this_.options.height,
         width: this_.options.width,
@@ -71,8 +73,8 @@
           showinfo: this_.options.showInfo,
         },
         events: {
-          onReady: (this_._onPlayerReady).bind(this),
-          onStateChange: (this_._onStateChange).bind(this)
+          onReady: ( this_._onPlayerReady ).bind( this ),
+          onStateChange: ( this_._onStateChange ).bind( this )
         }
       });
       
@@ -80,16 +82,18 @@
       if ( this_.options.playButton || this_.options.pauseButton ) {
         this_.customControls();
       }
-    }).bind(this);
+    }).bind( this );
 
     // Test if the youtube api is loaded
-    if ('YT' in window) {
-      if (window.YT.loaded === 0) {
-        if (window.onYouTubePlayerAPIReady) {
+    if ( 'YT' in window ) {
+      if ( window.YT.loaded === 0 ) {
+        if ( window.onYouTubePlayerAPIReady ) {
           var oldonYouTubePlayerAPIReady = window.onYouTubePlayerAPIReady;
         }
         window.onYouTubePlayerAPIReady = function() {
-          if (window.onYouTubePlayerAPIReady) { oldonYouTubePlayerAPIReady(); }
+          if ( window.onYouTubePlayerAPIReady ) {
+            oldonYouTubePlayerAPIReady();
+          }
           callback();
         };
       } else {
@@ -115,17 +119,18 @@
 
   // Controls
   Player.prototype.customControls = function() {
-    var this_ = this;
-    var customControlsClass = 'custom-controls';
-    var customControlsSelector = '.' + customControlsClass;
+    var this_ = this,
+        customControlsClass = 'custom-controls',
+        customControlsSelector = '.' + customControlsClass;
 
+    // Cache the created element so we know which is which
+    // when multiple videos are present
     this.videoControls = this.generateEl( 'div', null, customControlsClass );
 
-    // Find the first custom-controls element
-    // TODO: Look for multiple elements on the page
+    // If there is a wrapper add the controls inside it
     if ( this_.options.wrap ) {
-      var controls = document.querySelector( customControlsSelector ),
-          wrapper = document.querySelector( '.' + this_.options.wrapClass );
+      var wrapper = document.querySelector( '.' + this_.options.wrapClass ),
+          controls = document.querySelector( customControlsSelector );
 
       wrapper.appendChild( controls );
     }
@@ -133,9 +138,10 @@
     // Play button
     if ( this_.options.playButton ) {
       var playButtonEl;
+
       playButtonEl = document.createElement( 'button' );
       playButtonEl.innerHTML = this_.options.playButtonText;
-      playButtonEl.className = this_.options.playButton;
+      playButtonEl.className = this_.options.videoID + '-' + this_.options.playButtonClass;
       this.videoControls.appendChild( playButtonEl );
 
       document.querySelector( '.' + this_.options.playButton ).addEventListener( 'click', function() {
@@ -146,9 +152,10 @@
     // Pause video
     if ( this_.options.pauseButton ) {
       var pauseButtonEl;
+
       pauseButtonEl = document.createElement( 'button' );
       pauseButtonEl.innerHTML = this_.options.pauseButtonText;
-      pauseButtonEl.className = this_.options.pauseButton;
+      pauseButtonEl.className = this_.options.pauseButtonClass;
       this.videoControls.appendChild( pauseButtonEl );
 
       document.querySelector( '.' + this_.options.pauseButton ).addEventListener( 'click', function() {
@@ -159,11 +166,13 @@
   };
 
   // Events
+  // Player ready
   Player.prototype._onPlayerReady = function( event ) {
     if ( this.options.mute === 1) {
       event.target.mute();
     }
   };
+  // Player state change
   Player.prototype._onStateChange = function( event ) {};
 
 
