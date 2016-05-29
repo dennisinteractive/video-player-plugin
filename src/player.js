@@ -18,6 +18,7 @@
         playButtonClass: 'play-button',
         playButtonText: 'Play',
         pauseButton: null,
+        pauseButtonClass: 'pause-button',
         pauseButtonText: 'Pause',
         mute: null,
         placement: null
