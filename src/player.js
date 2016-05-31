@@ -40,36 +40,37 @@
 
   Player.prototype.init = function() {
 
-    var this_ = this;
+    var this_ = this,
+        options = this_.options;
 
     // If any extraClass names have been added add them
-    var extraClass = this_.options.extraClass,
+    var extraClass = options.extraClass,
         classCheck = extraClass === null,
         addExtraClass = classCheck ? '' : ' ' + extraClass;
 
-    if ( !document.getElementById( this_.options.videoId ) ) {
-      this.generateEl( 'div', this_.options.videoId, this_.options.playerClass + addExtraClass );
+    if ( !document.getElementById( options.videoId ) ) {
+      this.generateEl( 'div', options.videoId, options.playerClass + addExtraClass );
     }
 
     // Generate the wrapper
-    if ( this_.options.wrap || this_.options.wrapClass !== 'custom-player-wrapper' ) {
+    if ( options.wrap || options.wrapClass !== 'custom-player-wrapper' ) {
       this.wrapper = document.createElement( 'div' );
-      this.wrapper.className = this_.options.wrapClass;
-      this.customPlayer = document.getElementById( this_.options.videoId );
+      this.wrapper.className = options.wrapClass + ' ' + options.videoId;
+      this.customPlayer = document.getElementById( options.videoId );
       this.wrapper.appendChild( this.customPlayer.cloneNode( true ) );
       this.customPlayer.parentNode.replaceChild( this.wrapper, this.customPlayer );
     }
 
     var callback = ( function() {
-      this_.player = new YT.Player( this_.options.videoId, {
-        videoId: this_.options.videoId,
-        height: this_.options.height,
-        width: this_.options.width,
+      this_.player = new YT.Player( options.videoId, {
+        videoId: options.videoId,
+        height: options.height,
+        width: options.width,
         playerVars: {
-          autoplay: this_.options.autoPlay,
-          controls: this_.options.controls,
-          rel: this_.options.relatedVideos,
-          showinfo: this_.options.showInfo,
+          autoplay: options.autoPlay,
+          controls: options.controls,
+          rel: options.relatedVideos,
+          showinfo: options.showInfo,
         },
         events: {
           onReady: ( this_._onPlayerReady ).bind( this ),
@@ -78,7 +79,7 @@
       });
       
       // Load custom controls
-      if ( this_.options.playButton || this_.options.pauseButton ) {
+      if ( options.playButton || options.pauseButton ) {
         this_.customControls();
       }
     }).bind( this );
@@ -119,6 +120,7 @@
   // Controls
   Player.prototype.customControls = function() {
     var this_ = this,
+        options = this_.options,
         customControlsClass = 'custom-controls',
         customControlsSelector = '.' + customControlsClass;
 
@@ -134,13 +136,14 @@
     }
 
     // Play button
-    if ( this_.options.playButton || this_.options.playButtonClass ) {
+    // Check if anything to do with Play button is enabled
+    if ( options.playButton ) {
       var playButtonEl;
 
       playButtonEl = document.createElement( 'button' );
-      playButtonEl.innerHTML = this_.options.playButtonText;
       // Store class name of button
       playButtonClass = playButtonEl.className = this_.options.videoId + '-' + this_.options.playButtonClass;
+      playButtonEl.innerHTML = options.playButtonText;
       this.videoControls.appendChild( playButtonEl );
 
       document.querySelector( '.' + playButtonClass ).addEventListener( 'click', function() {
@@ -149,13 +152,14 @@
     }
 
     // Pause video
-    if ( this_.options.pauseButton || this_.options.pauseButtonClass ) {
+    // Check if anything to do with Pause button is enabled
+    if ( options.pauseButton ) {
       var pauseButtonEl;
 
       pauseButtonEl = document.createElement( 'button' );
-      pauseButtonEl.innerHTML = this_.options.pauseButtonText;
-      // Store class name of button
-      pauseButtonClass = pauseButtonEl.className = this_.options.videoId + '-' + this_.options.pauseButtonClass;
+      pauseButtonEl.innerHTML = options.pauseButtonText;
+
+      pauseButtonEl.className = options.videoId + '-' + options.pauseButtonClass;
       this.videoControls.appendChild( pauseButtonEl );
 
       document.querySelector( '.' + pauseButtonClass ).addEventListener( 'click', function() {
