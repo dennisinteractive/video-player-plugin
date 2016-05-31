@@ -29,11 +29,11 @@
       this.options = extendDefaults( defaults, arguments[0] );
     }
 
-    if( document.readyState !== 'complete' ) {
-      document.addEventListener( 'DOMContentLoaded', ( this.init ).bind( this ), false);
+    if( document.readyState === 'complete' || document.readyState === 'interactive' ) {
+      this.init();
     } else {
       // Run Player.init()
-      this.init();
+      document.addEventListener( 'DOMContentLoaded', ( this.init ).bind( this ), false);
     }
 
   };
@@ -230,16 +230,26 @@
 
   // Look for all elements that has a data-video-id
   // and populate an array
-  var playerData = document.querySelectorAll( '[data-video-id]' );
-  var standaloneVideos = [];
 
-  [].slice.call(playerData).forEach(function( vid ) {
-    var options = vid.dataset;
-    options.element = vid;
-    vid.id = vid.dataset.videoId;
-    standaloneVideos.push(new Player(options));
-  });
+  var getStandalone = function() {
+    var playerData = document.querySelectorAll( '[data-video-id]' );
+    var standaloneVideos = [];
 
-  return standaloneVideos;
+    [].slice.call(playerData).forEach(function( vid ) {
+      var options = vid.dataset;
+      options.element = vid;
+      vid.id = vid.dataset.videoId;
+      standaloneVideos.push(new Player(options));
+    });
+
+    return standaloneVideos;
+  }
+
+  if( document.readyState === 'complete' || document.readyState === 'interactive' ) {
+    getStandalone();
+  } else {
+    // Run Player.init()
+    document.addEventListener( 'DOMContentLoaded', getStandalone, false);
+  }
 
 })();
