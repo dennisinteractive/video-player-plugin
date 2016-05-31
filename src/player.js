@@ -109,9 +109,9 @@
       };
 
       var tag = document.createElement( 'script' );
+      var firstScriptTag = document.getElementsByTagName( 'script' )[0];
 
       tag.src = 'https://www.youtube.com/iframe_api';
-      var firstScriptTag = document.getElementsByTagName( 'script' )[0];
       firstScriptTag.parentNode.insertBefore( tag, firstScriptTag );
     }
 
@@ -172,7 +172,7 @@
   // Events
   // Player ready
   Player.prototype._onPlayerReady = function( event ) {
-    if ( this.options.mute === 1) {
+    if ( this.options.mute === 1 ) {
       event.target.mute();
     }
   };
@@ -201,7 +201,7 @@
 
     if ( this.options.placement !== null ) {
       var selector = document.querySelector( this.options.placement );
-      if ( !selector ) { throw new selectorError(selector); }
+      if ( !selector ) { throw new selectorError( selector ); }
       selector.appendChild( docFrag );
     } else {
       document.body.appendChild( docFrag );
