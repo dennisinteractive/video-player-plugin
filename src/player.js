@@ -125,7 +125,6 @@
     // Cache the created element so we know which is which
     // when multiple videos are present
     this.videoControls = this.generateEl( 'div', null, customControlsClass );
-
     // If there is a wrapper add the controls inside it
     if ( this_.options.wrap ) {
       var wrapper = document.querySelector( '.' + this_.options.wrapClass ),
@@ -141,7 +140,7 @@
       playButtonEl = document.createElement( 'button' );
       playButtonEl.innerHTML = this_.options.playButtonText;
       // Store class name of button
-      playButtonClass = playButtonEl.className = this_.options.videoID + '-' + this_.options.playButtonClass;
+      playButtonClass = playButtonEl.className = this_.options.videoId + '-' + this_.options.playButtonClass;
       this.videoControls.appendChild( playButtonEl );
 
       document.querySelector( '.' + playButtonClass ).addEventListener( 'click', function() {
@@ -156,7 +155,7 @@
       pauseButtonEl = document.createElement( 'button' );
       pauseButtonEl.innerHTML = this_.options.pauseButtonText;
       // Store class name of button
-      pauseButtonClass = pauseButtonEl.className = this_.options.videoID + '-' + this_.options.pauseButtonClass;
+      pauseButtonClass = pauseButtonEl.className = this_.options.videoId + '-' + this_.options.pauseButtonClass;
       this.videoControls.appendChild( pauseButtonEl );
 
       document.querySelector( '.' + pauseButtonClass ).addEventListener( 'click', function() {
