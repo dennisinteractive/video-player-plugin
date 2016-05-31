@@ -141,12 +141,12 @@
       var playButtonEl;
 
       playButtonEl = document.createElement( 'button' );
-      // Store class name of button
-      playButtonClass = playButtonEl.className = this_.options.videoId + '-' + this_.options.playButtonClass;
       playButtonEl.innerHTML = options.playButtonText;
+
+      playButtonEl.className = options.videoId + '-' + options.playButtonClass;
       this.videoControls.appendChild( playButtonEl );
 
-      document.querySelector( '.' + playButtonClass ).addEventListener( 'click', function() {
+      document.querySelector( '.' + playButtonEl.className ).addEventListener( 'click', function() {
         this_.player.playVideo();
       });
     }
@@ -162,7 +162,7 @@
       pauseButtonEl.className = options.videoId + '-' + options.pauseButtonClass;
       this.videoControls.appendChild( pauseButtonEl );
 
-      document.querySelector( '.' + pauseButtonClass ).addEventListener( 'click', function() {
+      document.querySelector( '.' + pauseButtonEl.className ).addEventListener( 'click', function() {
         this_.player.pauseVideo();
       });
     }
