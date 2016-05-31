@@ -52,7 +52,7 @@
     }
 
     // Generate the wrapper
-    if ( this_.options.wrap || this_.options.wrapClass ) {
+    if ( this_.options.wrap || this_.options.wrapClass !== 'custom-player-wrapper' ) {
       this.wrapper = document.createElement( 'div' );
       this.wrapper.className = this_.options.wrapClass;
       this.customPlayer = document.getElementById( this_.options.videoId );
