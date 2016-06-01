@@ -11,8 +11,6 @@
         controls: null,
         relatedVideos: 0,
         showInfo: null,
-        wrap: null,
-        wrapClass: 'custom-player-wrapper',
         playBtn: null,
         playBtnClass: 'play-btn',
         playBtnText: 'Play',
@@ -44,10 +42,6 @@
     if ( this.options.element ) {
       mode = 'exists';
       this.video = this.videoExists();
-    /*} else if ( this.options.wrap === 1 ) {
-      mode = 'wrap';
-      //this.addClasses(this.wrapper, ['hello', 'world']);
-      this.video = this.videoGet(); */
     } else {
       mode = 'generate';
       this.video = this.videoGenerate();
@@ -76,7 +70,6 @@
     }
 
   };
-  
 
   Player.prototype.YTGenerate = function() {
 
@@ -212,12 +205,6 @@
   Player.prototype.videoExists = function() {
 
     return this.options.element;
-
-  };
-
-  Player.prototype.videoGet = function() {
-
-    return document.querySelector( this.options.wrapClass );
 
   };
 
