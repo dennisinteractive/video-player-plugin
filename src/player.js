@@ -261,44 +261,6 @@
 
   // Private Methods
 
-  // Build the necessary markup
-  // and inject it into the document if needed
-  Player.prototype.generateEl = function( el, id, className ) {
-
-    var docFrag, element;
-
-    docFrag = document.createDocumentFragment();
-    element = document.createElement( el );
-
-    if ( id ) {
-      element.id = id;
-    }
-    if ( className ) {
-      element.className = className;
-    }
-
-    docFrag.appendChild( element );
-
-    if ( this.options.placement !== null ) {
-      var selector = document.querySelector( this.options.placement );
-      if ( !selector ) { throw new selectorError( selector ); }
-      selector.appendChild( docFrag );
-    } else {
-      document.body.appendChild( docFrag );
-    }
-
-    function selectorError( value ) {
-
-      this.message = 'Make sure your selector is on the page';
-      this.toString = function() {
-        return this.value + ' ' + this.message;
-      };
-    }
-
-    return element;
-
-  };
-
   // Utility method to extend defaults with user options
   function extendDefaults( source, properties ) {
 
