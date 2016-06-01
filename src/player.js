@@ -220,10 +220,10 @@
   // Listeners
   Player.prototype.assignListeners = function() {
 
-    this.video.addEventListener('click', function( event ) {
+    var matches = matchesPolyfill();
 
+    this.video.addEventListener('click', function( event ) {
       if ( event.target.nodeName === 'BUTTON' ) {
-        var matches = matchesPolyfill();
         if ( event.target[ matches ]( '.' + this.options.playBtnClass ) ) {
           this.player.playVideo();
         } else  if ( event.target[ matches ]( '.' + this.options.pauseBtnClass ) ) {
