@@ -29,7 +29,7 @@
       this.options = extendDefaults( defaults, arguments[0] );
     }
 
-    if( document.readyState === 'complete' || document.readyState === 'interactive' ) {
+    if( readyState() ) {
       this.init();
     } else {
       // Run Player.init()
@@ -264,7 +264,7 @@
   // Build the necessary markup
   // and inject it into the document if needed
   Player.prototype.generateEl = function( el, id, className ) {
-    
+
     var docFrag, element;
 
     docFrag = document.createDocumentFragment();
@@ -336,7 +336,11 @@
     return standaloneVideos;
   };
 
-  if( document.readyState === 'complete' || document.readyState === 'interactive' ) {
+  function readyState() {
+    return document.readyState === 'complete' || document.readyState === 'interactive';
+  }
+
+  if( readyState() ) {
     getStandalone();
   } else {
     document.addEventListener( 'DOMContentLoaded', getStandalone, false);
