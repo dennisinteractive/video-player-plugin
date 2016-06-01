@@ -235,20 +235,20 @@
     var playerData = document.querySelectorAll( '[data-video-id]' );
     var standaloneVideos = [];
 
-    [].slice.call(playerData).forEach(function( vid ) {
-      var options = vid.dataset;
+    // Cut up the array and spit out the available videos
+    [].slice.call( playerData ).forEach(function( vid ) {
+      var options = JSON.parse( JSON.stringify( vid.dataset ) );
+      vid.id = options.videoId;
       options.element = vid;
-      vid.id = vid.dataset.videoId;
-      standaloneVideos.push(new Player(options));
+      standaloneVideos.push( new Player( options ) );
     });
 
     return standaloneVideos;
-  }
+  };
 
   if( document.readyState === 'complete' || document.readyState === 'interactive' ) {
     getStandalone();
   } else {
-    // Run Player.init()
     document.addEventListener( 'DOMContentLoaded', getStandalone, false);
   }
 
