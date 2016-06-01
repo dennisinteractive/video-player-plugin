@@ -225,7 +225,8 @@
 
   Player.prototype.appendVideo = function() {
 
-    document.body.appendChild( this.video );
+    var place = (this.options.placement) ? document.querySelector( this.options.placement ) : document.body;
+    place.appendChild( this.video );
 
   };
 
