@@ -248,6 +248,20 @@
   };
   // Player state change
   Player.prototype._onStateChange = function( event ) {
+
+    if (this.options._onStateChange) {
+      switch( event.data ) {
+        case 0:
+          console.log('Video ended');
+          break;
+        case 1:
+          console.log('Video playing');
+          break;
+        case 2:
+          console.log('Video paused');
+          break;
+      }
+
       this.options._onStateChange.bind( this )();
     }
 
