@@ -107,9 +107,7 @@
       if ( window.YT.loaded === 0 ) {
         var oldonYouTubePlayerAPIReady = window.onYouTubePlayerAPIReady;
         window.onYouTubePlayerAPIReady = function() {
-          if ( window.onYouTubePlayerAPIReady ) {
-            oldonYouTubePlayerAPIReady();
-          }
+          oldonYouTubePlayerAPIReady();
           callback();
         };
       } else {
