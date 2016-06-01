@@ -105,9 +105,7 @@
     // Test if the youtube api is loaded
     if ( 'YT' in window ) {
       if ( window.YT.loaded === 0 ) {
-        if ( window.onYouTubePlayerAPIReady ) {
-          var oldonYouTubePlayerAPIReady = window.onYouTubePlayerAPIReady;
-        }
+        var oldonYouTubePlayerAPIReady = window.onYouTubePlayerAPIReady;
         window.onYouTubePlayerAPIReady = function() {
           if ( window.onYouTubePlayerAPIReady ) {
             oldonYouTubePlayerAPIReady();
