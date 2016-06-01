@@ -92,7 +92,7 @@
           autoplay: options.autoPlay,
           controls: options.controls,
           rel: options.relatedVideos,
-          showinfo: options.showInfo,
+          showinfo: options.showInfo
         },
         events: {
           onReady: ( this_._onPlayerReady ).bind( this ),
@@ -217,9 +217,11 @@
 
   };
 
-  // Player.prototype.videoGet = function() {
-  //   return document.querySelector( this.options.wrapClass );
-  // };
+  Player.prototype.videoGet = function() {
+
+    return document.querySelector( this.options.wrapClass );
+
+  };
 
   Player.prototype.appendVideo = function() {
 
