@@ -5,7 +5,6 @@
     var defaults = {
         videoId: null,
         playerClass: 'custom-player',
-        extraClass: null,
         width: 480,
         height: 270,
         autoPlay: null,
@@ -21,7 +20,8 @@
         pauseBtnClass: 'pause-btn',
         pauseBtnText: 'Pause',
         mute: null,
-        placement: null
+        placement: null,
+        videoContainer: null
     };
   
     // Add our defaults above into a global array of options
