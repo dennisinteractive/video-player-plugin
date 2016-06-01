@@ -241,9 +241,17 @@
       event.target.mute();
     }
 
+    if (this.options._onPlayerReady) {
+      this.options._onPlayerReady.bind( this )();
+    }
+
   };
   // Player state change
-  Player.prototype._onStateChange = function( event ) {};
+  Player.prototype._onStateChange = function( event ) {
+      this.options._onStateChange.bind( this )();
+    }
+
+  };
 
   // Private Methods
 
@@ -256,6 +264,7 @@
         source[ property ] = properties[ property ];
       }
     }
+
     return source;
 
   }
