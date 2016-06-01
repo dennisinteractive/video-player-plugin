@@ -285,7 +285,9 @@
 
   function matchesPolyfill( el ) {
 
-    var matches = document.body.matches || document.body.webkitMatchesSelector || document.body.msMatchesSelector;
+    var body = document.body;
+    var matches = body.matches || body.webkitMatchesSelector || body.msMatchesSelector;
+
     return matches.name;
 
   }
