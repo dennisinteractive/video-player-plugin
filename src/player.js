@@ -19,7 +19,8 @@
         pauseBtnText: 'Pause',
         mute: null,
         placement: null,
-        videoContainer: null
+        videoContainer: null,
+        onStateChange: null
     };
   
     // Add our defaults above into a global array of options
@@ -234,6 +235,29 @@
       }
     }.bind( this ));
 
+    // // Add an event listener
+    var playing = new Event('video-playing', { 'detail': 'Video Playing' });
+    var paused = new Event('video-paused', { 'detail': 'Video Paused' });
+    var ended = new Event('video-ended', { 'detail': 'Video Ended' });
+
+    this.customEvents = {
+      playing: playing,
+      paused: paused,
+      ended: ended
+    };
+
+    if ( this.options.onStateChange ) {
+      if ( this.options.onStateChange.playing ) {
+        this.video.addEventListener( 'video-playing', ( this.options.onStateChange.playing ).bind( this ) );
+      }
+      if ( this.options.onStateChange.paused ) {
+        this.video.addEventListener( 'video-paused', ( this.options.onStateChange.paused ).bind( this ) );
+      }
+      if ( this.options.onStateChange.ended ) {
+        this.video.addEventListener( 'video-ended', ( this.options.onStateChange.ended ).bind( this ) );
+      }
+    }
+
   };
 
   // Player ready
@@ -248,23 +272,23 @@
     }
 
   };
+
   // Player state change
   Player.prototype._onStateChange = function( event ) {
 
-    if (this.options._onStateChange) {
-      switch( event.data ) {
+    if ( this.options.onStateChange ) {
+
+      switch (event.data) {
         case 0:
-          console.log('Video ended');
+          this.video.dispatchEvent( this.customEvents.ended );
           break;
-        case 1:
-          console.log('Video playing');
+        case YT.PlayerState.PLAYING:
+          this.video.dispatchEvent( this.customEvents.playing );
           break;
         case 2:
-          console.log('Video paused');
+          this.video.dispatchEvent( this.customEvents.paused );
           break;
       }
-
-      this.options._onStateChange.bind( this )();
     }
 
   };
