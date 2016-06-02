@@ -37,6 +37,7 @@ playButtonText | string | 'Play' | Customise play button text.
 pauseButton | string | null | Custom pause button selector. Creates button and adds custom class to it.
 pauseButtonText | string | 'Pause' | Customise pause button text.
 placement | string | null | Specify where you would like the video to appear. After body tag by default.
+videoContainer | string | null | Specify where you would like the video to appear when using data attributes. A selector string which identifies the element to use to place the video that exists within the video container.
 
 
 ## Road map

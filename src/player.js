@@ -62,8 +62,10 @@
 
   Player.prototype.appendYTDiv = function() {
 
+    // When using data attributes you can specify an element
+    // inside the div in which to place the video.
     if ( this.options.videoContainer ) {
-      this.youtubeDiv = this.video.querySelector('.' + this.options.videoContainer );
+      this.youtubeDiv = this.video.querySelector( this.options.videoContainer );
     } else {
       this.youtubeDiv = document.createElement( 'div' );
       this.video.appendChild( this.youtubeDiv );
