@@ -278,11 +278,11 @@
 
     if ( this.options.onStateChange ) {
 
-      switch (event.data) {
+      switch ( event.data ) {
         case 0:
           this.video.dispatchEvent( this.customEvents.ended );
           break;
-        case YT.PlayerState.PLAYING:
+        case 1:
           this.video.dispatchEvent( this.customEvents.playing );
           break;
         case 2:
