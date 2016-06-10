@@ -213,8 +213,10 @@
 
   Player.prototype.appendVideo = function() {
 
-    var place = (this.options.placement) ? document.querySelector( this.options.placement ) : document.body;
-    place.appendChild( this.video );
+    if ( this.options.placement ) {
+      var place = document.querySelector( this.options.placement );
+      place.appendChild( this.video );
+    }
 
   };
 
