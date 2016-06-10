@@ -55,7 +55,7 @@
     }
 
     // Place Video on the page
-    this.appendVideo();
+    this.appendVideo( mode );
     this.YTGenerate();
     this.assignListeners();
 
@@ -210,11 +210,15 @@
 
   };
 
-  Player.prototype.appendVideo = function() {
+  Player.prototype.appendVideo = function( mode ) {
 
-    if ( this.options.placement ) {
-      var place = document.querySelector( this.options.placement );
-      place.appendChild( this.video );
+    if ( mode === 'generate' ) {
+      if ( this.options.placement ) {
+        var place = document.querySelector( this.options.placement );
+        place.appendChild( this.video );
+      } else {
+        throw 'Need to specify \'placement\' parameter';
+      }
     }
 
   };
