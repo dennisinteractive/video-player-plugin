@@ -38,3 +38,6 @@ gulp.task('compress', ['copy'], function() {
     }))
     .pipe(gulp.dest('dist'));
 });
+
+// Default task to do all the above
+gulp.task('default', ['lint', 'compress']);
