@@ -5,21 +5,22 @@
     var defaults = {
         videoId: null,
         playerClass: 'custom-player',
-        extraClass: null,
         width: 480,
         height: 270,
         autoPlay: null,
         controls: null,
         relatedVideos: 0,
         showInfo: null,
-        wrap: null,
-        wrapClass: 'custom-player-wrapper',
-        playButton: null,
-        playButtonText: 'Play',
-        pauseButton: null,
-        pauseButtonText: 'Pause',
+        playBtn: null,
+        playBtnClass: 'play-btn',
+        playBtnText: 'Play',
+        pauseBtn: null,
+        pauseBtnClass: 'pause-btn',
+        pauseBtnText: 'Pause',
         mute: null,
-        placement: null
+        placement: null,
+        videoContainer: null,
+        onStateChange: null
     };
   
     // Add our defaults above into a global array of options
@@ -27,72 +28,81 @@
       this.options = extendDefaults( defaults, arguments[0] );
     }
 
-    if( document.readyState !== 'complete' ) {
-      document.addEventListener( 'DOMContentLoaded', ( this.init ).bind( this ), false);
-    } else {
-      // Run Player.init()
+    if( readyState() ) {
       this.init();
+    } else {
+      document.addEventListener( 'DOMContentLoaded', ( this.init ).bind( this ), false);
     }
 
   };
 
   Player.prototype.init = function() {
 
-    var this_ = this;
+    var mode;
 
-    // If any extraClass names have been added add them
-    var extraClass = this_.options.extraClass,
-        classCheck = extraClass === null,
-        addExtraClass = classCheck ? '' : ' ' + extraClass;
-
-    if ( !document.getElementById( this_.options.videoId ) ) {
-      this.generateEl( 'div', this_.options.videoId, this_.options.playerClass + addExtraClass );
+    if ( this.options.element ) {
+      mode = 'exists';
+      this.video = this.videoExists();
+    } else {
+      mode = 'generate';
+      this.video = this.videoGenerate();
     }
 
-    // Generate the wrapper
-    if ( this_.options.wrap || this_.options.wrapClass ) {
-      this.wrapper = document.createElement( 'div' );
-      this.wrapper.className = this_.options.wrapClass;
-      this.customPlayer = document.getElementById( this_.options.videoId );
-      this.wrapper.appendChild( this.customPlayer.cloneNode( true ) );
-      this.customPlayer.parentNode.replaceChild( this.wrapper, this.customPlayer );
+    this.appendYTDiv();
+
+    if ( this.options.playBtn || this.options.pauseBtn ) {
+      this.video = this.customControls( mode );
     }
 
-    var callback = (function() {
-      this_.player = new YT.Player(this_.options.videoId, {
-        videoId: this_.options.videoId,
-        height: this_.options.height,
-        width: this_.options.width,
-        playButton: this_.options.playButton,
-        pauseButton: this_.options.pauseButton,
+    // Place Video on the page
+    this.appendVideo();
+    this.YTGenerate();
+    this.assignListeners();
+
+  };
+
+  Player.prototype.appendYTDiv = function() {
+
+    // When using data attributes you can specify an element
+    // inside the div in which to place the video.
+    if ( this.options.videoContainer ) {
+      this.youtubeDiv = this.video.querySelector( this.options.videoContainer );
+    } else {
+      this.youtubeDiv = document.createElement( 'div' );
+      this.video.appendChild( this.youtubeDiv );
+    }
+
+  };
+
+  Player.prototype.YTGenerate = function() {
+
+    var this_ = this,
+        options = this_.options;
+
+    var callback = ( function() {
+      this_.player = new YT.Player( this.youtubeDiv, {
+        videoId: options.videoId,
+        height: options.height,
+        width: options.width,
         playerVars: {
-          autoplay: this_.options.autoPlay,
-          controls: this_.options.controls,
-          rel: this_.options.relatedVideos,
-          showinfo: this_.options.showInfo,
+          autoplay: options.autoPlay,
+          controls: options.controls,
+          rel: options.relatedVideos,
+          showinfo: options.showInfo
         },
         events: {
           onReady: ( this_._onPlayerReady ).bind( this ),
           onStateChange: ( this_._onStateChange ).bind( this )
         }
       });
-      
-      // Load custom controls
-      if ( this_.options.playButton || this_.options.pauseButton ) {
-        this_.customControls();
-      }
-    }).bind(this);
+    }).bind( this );
 
     // Test if the youtube api is loaded
     if ( 'YT' in window ) {
       if ( window.YT.loaded === 0 ) {
-        if ( window.onYouTubePlayerAPIReady ) {
-          var oldonYouTubePlayerAPIReady = window.onYouTubePlayerAPIReady;
-        }
+        var oldonYouTubePlayerAPIReady = window.onYouTubePlayerAPIReady;
         window.onYouTubePlayerAPIReady = function() {
-          if ( window.onYouTubePlayerAPIReady ) {
-            oldonYouTubePlayerAPIReady();
-          }
+          oldonYouTubePlayerAPIReady();
           callback();
         };
       } else {
@@ -108,130 +118,235 @@
       };
 
       var tag = document.createElement( 'script' );
+      var firstScriptTag = document.getElementsByTagName( 'script' )[0];
 
       tag.src = 'https://www.youtube.com/iframe_api';
-      var firstScriptTag = document.getElementsByTagName( 'script' )[0];
       firstScriptTag.parentNode.insertBefore( tag, firstScriptTag );
     }
 
   };
 
   // Controls
-  Player.prototype.customControls = function() {
-    var this_ = this;
-    var customControlsClass = 'custom-controls';
-    var customControlsSelector = '.' + customControlsClass;
-
-    this.videoControls = this.generateEl( 'div', null, customControlsClass );
-
-    // Find the first custom-controls element
-    // TODO: Look for multiple elements on the page
-    if ( this_.options.wrap ) {
-      var controls = document.querySelector( customControlsSelector ),
-          wrapper = document.querySelector( '.' + this_.options.wrapClass );
-
-      wrapper.appendChild( controls );
-    }
-
+  Player.prototype.customControls = function( mode ) {
     // Play button
-    if ( this_.options.playButton ) {
-      var playButtonEl;
-      playButtonEl = document.createElement( 'button' );
-      playButtonEl.innerHTML = this_.options.playButtonText;
-      playButtonEl.className = this_.options.playButton;
-      this.videoControls.appendChild( playButtonEl );
-
-      document.querySelector( '.' + this_.options.playButton ).addEventListener( 'click', function() {
-        this_.player.playVideo();
-      });
+    if ( !this.options.playBtn.nodeName ) {
+      this.playBtn = this.playBtnGenerate();
+    } else {
+      this.playBtn = this.playBtnExists();
     }
 
-    // Pause video
-    if ( this_.options.pauseButton ) {
-      var pauseButtonEl;
-      pauseButtonEl = document.createElement( 'button' );
-      pauseButtonEl.innerHTML = this_.options.pauseButtonText;
-      pauseButtonEl.className = this_.options.pauseButton;
-      this.videoControls.appendChild( pauseButtonEl );
+    // Pause button
+    if ( !this.options.pauseBtn.nodeName ) {
+      this.pauseBtn = this.pauseBtnGenerate();
+    } else {
+      this.pauseBtn = this.pauseBtnExists();
+    }
 
-      document.querySelector( '.' + this_.options.pauseButton ).addEventListener( 'click', function() {
-        this_.player.pauseVideo();
-      });
+    // Custom Controls
+    if ( this.options.playBtn || this.options.pauseBtn ) {
+      var control = document.createElement( 'div' );
+      control.className = 'custom-controls';
+
+      if ( this.playBtn ) {
+        control.appendChild( this.playBtn );
+      }
+      if ( this.pauseBtn ) {
+        control.appendChild( this.pauseBtn );
+      }
+      // Add controls to the generated video
+      this.video.appendChild( control );
+    }
+
+    return this.video;
+
+  };
+  
+  // Play Button
+  Player.prototype.playBtnExists = function() {
+
+    return this.options.playBtnClass;
+
+  };
+  Player.prototype.playBtnGenerate = function() {
+
+    var el = document.createElement( 'button' );
+    el.className = this.options.playBtnClass;
+    el.innerHTML = this.options.playBtnText;
+
+    return el;
+
+  };
+
+  // Pause Button
+  Player.prototype.pauseBtnExists = function() {
+
+    return this.options.pauseBtnClass;
+
+  };
+  Player.prototype.pauseBtnGenerate = function() {
+
+    var el = document.createElement( 'button' );
+    el.className = this.options.pauseBtnClass;
+    el.innerHTML = this.options.pauseBtnText;
+
+    return el;
+
+  };
+
+  // Generate the class
+  Player.prototype.videoGenerate = function() {
+
+    var el = document.createElement( 'div' );
+    el.id = this.options.videoId
+    el.className = this.options.playerClass;
+
+    return el;
+
+  };
+
+  Player.prototype.videoExists = function() {
+
+    return this.options.element;
+
+  };
+
+  Player.prototype.appendVideo = function() {
+
+    if ( this.options.placement ) {
+      var place = document.querySelector( this.options.placement );
+      place.appendChild( this.video );
     }
 
   };
+
 
   // Events
+
+  // Listeners
+  Player.prototype.assignListeners = function() {
+
+    var matches = matchesPolyfill();
+
+    this.video.addEventListener('click', function( event ) {
+      if ( event.target.nodeName === 'BUTTON' ) {
+        if ( event.target[ matches ]( '.' + this.options.playBtnClass ) ) {
+          this.player.playVideo();
+        } else  if ( event.target[ matches ]( '.' + this.options.pauseBtnClass ) ) {
+          this.player.pauseVideo();
+        }
+      }
+    }.bind( this ));
+
+    // // Add an event listener
+    var playing = new Event('video-playing', { 'detail': 'Video Playing' });
+    var paused = new Event('video-paused', { 'detail': 'Video Paused' });
+    var ended = new Event('video-ended', { 'detail': 'Video Ended' });
+
+    this.customEvents = {
+      playing: playing,
+      paused: paused,
+      ended: ended
+    };
+
+    if ( this.options.onStateChange ) {
+      if ( this.options.onStateChange.playing ) {
+        this.video.addEventListener( 'video-playing', ( this.options.onStateChange.playing ).bind( this ) );
+      }
+      if ( this.options.onStateChange.paused ) {
+        this.video.addEventListener( 'video-paused', ( this.options.onStateChange.paused ).bind( this ) );
+      }
+      if ( this.options.onStateChange.ended ) {
+        this.video.addEventListener( 'video-ended', ( this.options.onStateChange.ended ).bind( this ) );
+      }
+    }
+
+  };
+
   // Player ready
   Player.prototype._onPlayerReady = function( event ) {
-    if ( this.options.mute === 1) {
+
+    if ( this.options.mute === 1 ) {
       event.target.mute();
     }
+
+    if (this.options._onPlayerReady) {
+      this.options._onPlayerReady.bind( this )();
+    }
+
   };
+
   // Player state change
-  Player.prototype._onStateChange = function( event ) {};
+  Player.prototype._onStateChange = function( event ) {
+
+    if ( this.options.onStateChange ) {
+
+      switch ( event.data ) {
+        case 0:
+          this.video.dispatchEvent( this.customEvents.ended );
+          break;
+        case 1:
+          this.video.dispatchEvent( this.customEvents.playing );
+          break;
+        case 2:
+          this.video.dispatchEvent( this.customEvents.paused );
+          break;
+      }
+    }
+
+  };
 
 
   // Private Methods
 
-  // Build the necessary markup
-  // and inject it into the document if needed
-  Player.prototype.generateEl = function( el, id, className ) {
-    var docFrag, element;
-
-    docFrag = document.createDocumentFragment();
-    element = document.createElement( el );
-
-    if ( id ) {
-      element.id = id;
-    }
-    if ( className ) {
-      element.className = className;
-    }
-
-    docFrag.appendChild( element );
-
-    if ( this.options.placement !== null ) {
-      var selector = document.querySelector( this.options.placement );
-      if ( !selector ) { throw new selectorError(selector); }
-      selector.appendChild( docFrag );
-    } else {
-      document.body.appendChild( docFrag );
-    }
-
-    function selectorError( value ) {
-      this.message = 'Make sure your selector is on the page';
-      this.toString = function() {
-        return this.value + ' ' + this.message;
-      };
-    }
-
-    return element;
-  };
-
   // Utility method to extend defaults with user options
   function extendDefaults( source, properties ) {
+
     var property;
     for ( property in properties ) {
       if ( properties.hasOwnProperty( property ) ) {
         source[ property ] = properties[ property ];
       }
     }
+
     return source;
+
   }
 
-  // Look for all elements that has a data-video-id
+  function matchesPolyfill( el ) {
+
+    var body = document.body;
+    var matches = body.matches || body.webkitMatchesSelector || body.msMatchesSelector;
+
+    return matches.name;
+
+  }
+
+  // Look for all elements that has `data-video-id`
   // and populate an array
-  var playerData = document.querySelectorAll( '[data-video-id]' );
-  var standaloneVideos = [];
+  var getStandalone = function() {
+    var playerData = document.querySelectorAll( '[data-video-id]' );
+    var standaloneVideos = [];
 
-  [].slice.call(playerData).forEach(function( vid ) {
-    var options = vid.dataset;
-    options.element = vid;
-    vid.id = vid.dataset.videoId;
-    standaloneVideos.push(new Player(options));
-  });
+    // Cut up the array and spit out the available videos
+    [].slice.call( playerData ).forEach(function( vid ) {
+      var options = JSON.parse( JSON.stringify( vid.dataset ) );
+      vid.id = options.videoId;
+      options.element = vid;
+      standaloneVideos.push( new Player( options ) );
+    });
 
-  return standaloneVideos;
+    return standaloneVideos;
+  };
+
+  // Check if the DOM is loaded by looking for 'complete' or 'interactive'
+  function readyState() {
+    return document.readyState === 'complete' || document.readyState === 'interactive';
+  }
+
+  if( readyState() ) {
+    getStandalone();
+  } else {
+    document.addEventListener( 'DOMContentLoaded', getStandalone, false);
+  }
 
 })();
