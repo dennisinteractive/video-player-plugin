@@ -31,7 +31,6 @@
     if( readyState() ) {
       this.init();
     } else {
-      // Run Player.init()
       document.addEventListener( 'DOMContentLoaded', ( this.init ).bind( this ), false);
     }
 
@@ -40,6 +39,7 @@
   Player.prototype.init = function() {
 
     var mode;
+
     if ( this.options.element ) {
       mode = 'exists';
       this.video = this.videoExists();
@@ -95,7 +95,6 @@
           onStateChange: ( this_._onStateChange ).bind( this )
         }
       });
-
     }).bind( this );
 
     // Test if the youtube api is loaded
@@ -220,6 +219,7 @@
 
   };
 
+
   // Events
 
   // Listeners
@@ -295,6 +295,7 @@
 
   };
 
+
   // Private Methods
 
   // Utility method to extend defaults with user options
@@ -320,7 +321,7 @@
 
   }
 
-  // Look for all elements that has a data-video-id
+  // Look for all elements that has `data-video-id`
   // and populate an array
   var getStandalone = function() {
     var playerData = document.querySelectorAll( '[data-video-id]' );
@@ -337,6 +338,7 @@
     return standaloneVideos;
   };
 
+  // Check if the DOM is loaded by looking for 'complete' or 'interactive'
   function readyState() {
     return document.readyState === 'complete' || document.readyState === 'interactive';
   }
