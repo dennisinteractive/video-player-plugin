@@ -18,13 +18,14 @@
     <h1>Custom Events with API</h1>
     
     <div class="TYVideo"></div>
-    <h2 class="heading main-heading">When the video is ready this heading will turn green</h2>
     <p>Hooking into the `_onPlayerReady` event allows us to notify the user the video is ready</p>
+    <h2 class="heading main-heading">Video Not Ready</h2>
     
     <h2 class="heading">On state change listener</h2>
     <p>Using the `onStateChange` param, we can interact with the advert based upon what the video is doing.</p>
 
     <div class="video-player"></div>
+    <h2 class="heading video-status">Default state</h2>
 
     <script>
       var myVideo = new Player({
@@ -33,18 +34,22 @@
         mute: 1,
         onStateChange: {
           playing: function() {
-            console.log('PLAYING!');
+            var status = document.querySelector('.video-status');
+            status.innerHTML = 'Video Playing!';
           },
           paused: function() {
-            console.log('PAUSED!');
+            var status = document.querySelector('.video-status');
+            status.innerHTML = 'Video Paused!';
           },
           ended: function() {
-            console.log('ENDED!');
+            var status = document.querySelector('.video-status');
+            status.innerHTML = 'Video Ended!';
           }
         },
         _onPlayerReady: function() {
           var heading = document.querySelector('.main-heading');
           heading.className += ' ready';
+          heading.innerHTML = 'Video Ready';
         },
       });
     </script>
