@@ -8,29 +8,32 @@
   <link href="../css/style.css" rel="stylesheet">
   <script src="../../src/player.js"></script>
 </head>
-<body style="max-width: 70%; margin: 0 auto; text-align: center;">
+<body class="api">
 
-  <h1>Using the API</h1>
+  <div class="container">
+    <h1>Using the API</h1>
 
-  <div class="tester-div"></div>
+    <div class="tester-div"></div>
 
-  <script>
-    var myVideo = new Player({
-      videoId: 'JXqTxFkZhao',
-      placement: '.tester-div'
-    });
-  </script>
-
-  <p>All you need is the ID of the video you want to display and where you want to place it.</p>
-
-  <pre>
-    <code class="javascript">
+    <script>
       var myVideo = new Player({
-        videoId: 'YrblkMd-KMs',
+        videoId: 'JXqTxFkZhao',
         placement: '.tester-div'
       });
-    </code>
-  </pre>
+    </script>
+
+    <p>All you need is the ID of the video you want to display and where you want to place it.</p>
+
+    <pre>
+      <code class="javascript">
+        var myVideo = new Player({
+          videoId: 'YrblkMd-KMs',
+          placement: '.tester-div'
+        });
+      </code>
+    </pre>
+
+  </div>
 
   <script type="text/javascript" src="../highlight.pack.js"></script>
   <script>if( window.console ) { hljs.initHighlightingOnLoad(); }</script>
