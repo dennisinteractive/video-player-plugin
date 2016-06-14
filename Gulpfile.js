@@ -3,10 +3,11 @@
 var gulp = require('gulp');
 var uglify = require('gulp-uglify');
 var rename = require("gulp-rename");
+var plumber = require('gulp-plumber');
 var jshint = require('gulp-jshint');
-var gulp   = require('gulp');
 var cssmin = require('gulp-cssmin');
 var sass = require('gulp-sass');
+var browserSync = require('browser-sync').create();
 
 var config = {
   dir: {
@@ -25,21 +26,25 @@ gulp.task('lint', function() {
     .pipe(jshint.reporter('jshint-stylish'));
 });
 
-// Copy our code to dist folder
+// Copy our uncompiled code to dist folder
 gulp.task('copy', function() {
   return gulp.src( config.dir.src + '/player.js')
     .pipe(gulp.dest('dist'));
 });
 
 // Compress (and copy) our code
-gulp.task('compress', ['copy'], function() {
+gulp.task('js', ['lint', 'copy'], function() {
   return gulp.src( config.dir.src + '/' + config.js.glob )
+    .pipe(plumber())
     .pipe(uglify())
     .pipe(rename({
       suffix: '.min'
     }))
     .pipe(gulp.dest('dist'));
 });
+
+gulp.task('js-watch', ['js'], browserSync.reload);
+gulp.task('css-watch', ['styles'], browserSync.reload);
 
 // Styles
 gulp.task('styles', function() {
@@ -49,5 +54,19 @@ gulp.task('styles', function() {
     .pipe(gulp.dest('example/css/'));
 });
 
+// Boot up server to look at examples
+gulp.task('serve', ['js', 'styles'], function() {
+  browserSync.init({
+    server: {
+      baseDir: "./"
+    }
+  });
+
+  gulp.watch('src/*.js', ['js-watch']);
+  gulp.watch('example/sass/**/*.scss', ['css-watch']);
+  gulp.watch('**/*.html').on('change', browserSync.reload);
+
+});
+
 // Default task to do all the above
-gulp.task('default', ['lint', 'compress']);
+gulp.task('default', ['serve']);
