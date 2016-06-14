@@ -20,12 +20,12 @@
     <h2 class="heading">On state change listener</h2>
     <p>Using the `onStateChange` param, we can interact with the advert based upon what the video is doing.</p>
 
-    <div class="status"></div>
+    <div class="video-player"></div>
 
     <script>
       var myVideo = new Player({
-        videoId: 'pPWKJTo2GXw',
-        placement: '.container',
+        videoId: 'JXqTxFkZhao',
+        placement: '.video-player',
         mute: 1,
         onStateChange: {
           playing: function() {
@@ -52,13 +52,13 @@
           mute: 1,
           onStateChange: {
             playing: function() {
-              console.log('PLAYING!');
+              // Some code here...
             },
             paused: function() {
-              console.log('PAUSED!');
+              // Some code here...
             },
             ended: function() {
-              console.log('ENDED!');
+              // Some code here...
             }
           },
           _onPlayerReady: function() {
