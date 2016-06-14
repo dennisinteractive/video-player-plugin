@@ -5,6 +5,8 @@ var uglify = require('gulp-uglify');
 var rename = require("gulp-rename");
 var jshint = require('gulp-jshint');
 var gulp   = require('gulp');
+var cssmin = require('gulp-cssmin');
+var sass = require('gulp-sass');
 
 var config = {
   dir: {
@@ -37,6 +39,14 @@ gulp.task('compress', ['copy'], function() {
       suffix: '.min'
     }))
     .pipe(gulp.dest('dist'));
+});
+
+// Styles
+gulp.task('styles', function() {
+  gulp.src('example/sass/**/*.scss')
+    .pipe(sass().on('error', sass.logError))
+    .pipe(cssmin())
+    .pipe(gulp.dest('example/css/'));
 });
 
 // Default task to do all the above
