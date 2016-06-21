@@ -16,6 +16,7 @@ pre, code {
 .container {
   margin: 0 auto;
   text-align: center;
+
   @media screen and (min-width: $mobile) {
     max-width: 70%;
   }
@@ -82,6 +83,8 @@ pre, code {
     background-color: rgba($primary-light-blue, 0.9);
   }
 }
+
+// Heading
 .heading {
   font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
 
@@ -91,10 +94,12 @@ pre, code {
     line-height: 1.3;
   }
 }
+
 .section {
   padding: 5.625rem 1.25rem;
 }
 
+// List
 .list {
   margin: 0;
   padding: 0;
@@ -134,7 +139,7 @@ pre, code {
       height: 250px;
     }
 
-    span {
+    .text {
       @media screen and (min-width: $mobile) {
         position: absolute;
         top: 50%;
