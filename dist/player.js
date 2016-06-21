@@ -20,9 +20,10 @@
         mute: null,
         placement: null,
         videoContainer: null,
-        onStateChange: null
+        onStateChange: null,
+        responsive: null
     };
-  
+
     // Add our defaults above into a global array of options
     if ( arguments[0] && typeof arguments[0] === 'object' ) {
       this.options = extendDefaults( defaults, arguments[0] );
@@ -160,7 +161,7 @@
     return this.video;
 
   };
-  
+
   // Play Button
   Player.prototype.playBtnExists = function() {
 
@@ -199,6 +200,10 @@
     var el = document.createElement( 'div' );
     el.id = this.options.videoId;
     el.className = this.options.playerClass;
+
+    if ( this.options.responsive ) {
+      el.className += ' responsive';
+    }
 
     return el;
 
