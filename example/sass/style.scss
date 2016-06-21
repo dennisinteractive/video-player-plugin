@@ -2,6 +2,8 @@
 @import 'monokai-sublime';
 
 @import 'config';
+@import 'event-listener';
+
 body {
   font-family: "Roboto","Helvetica","Arial",sans-serif;
   margin: 0;
@@ -10,9 +12,6 @@ body {
 pre, code { text-align: left; }
 .container { max-width: 70%; margin: 0 auto; text-align: center; }
 
-// Event listener example
-.event-listener .main-heading { color: red; }
-.event-listener .main-heading.ready { color: yellowgreen; }
 
 .header {
   background-color: #0ea6a4;
