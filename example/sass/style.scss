@@ -112,6 +112,10 @@ pre, code {
     @media screen and (min-width: $mobile) {
       display: table-cell;
       margin: 0 5px 5px 0;
+
+      &:last-child {
+        margin: 0;
+      }
     }
   }
   a {
