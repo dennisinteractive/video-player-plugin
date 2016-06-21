@@ -5,16 +5,23 @@
 @import 'event-listener';
 
 body {
-  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
   margin: 0;
   background-color: #EFEFEF;
 }
-pre, code { text-align: left; }
-.container { max-width: 70%; margin: 0 auto; text-align: center; }
+pre, code {
+  text-align: left;
+}
 
+.container {
+  margin: 0 auto;
+  text-align: center;
+  @media screen and (min-width: $mobile) {
+    max-width: 70%;
+  }
+}
 
 .header {
-  background-color: #0ea6a4;
   width: 100%;
   margin: 0;
   padding: 15px;
@@ -34,13 +41,11 @@ pre, code { text-align: left; }
   -webkit-flex-shrink: 0;
     -ms-flex-negative: 0;
           flex-shrink: 0;
-  width: 100%;
   border: none;
-  background-color: rgb(63,81,181);
-  color: rgb(255,255,255);
-  box-shadow: 0 2px 2px 0 rgba(0,0,0,.14),0 3px 1px -2px rgba(0,0,0,.2),0 1px 5px 0 rgba(0,0,0,.12);
-  transition-duration: .2s;
-  transition-timing-function: cubic-bezier(.4,0,.2,1);
+  background-color: $primary-light-blue;
+  box-shadow: $box-shadow;
+  transition-duration: 0.2s;
+  transition-timing-function: cubic-bezier(0.4,0,0.2, 1);
   transition-property: max-height,box-shadow;
 
   a {
