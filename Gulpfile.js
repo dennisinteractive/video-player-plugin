@@ -44,18 +44,26 @@ gulp.task('js', ['lint', 'copy'], function() {
 });
 
 gulp.task('js-watch', ['js'], browserSync.reload);
-gulp.task('css-watch', ['styles'], browserSync.reload);
+gulp.task('css-watch', ['example-styles', 'styles'], browserSync.reload);
 
-// Styles
-gulp.task('styles', function() {
+// Example Styles
+gulp.task('example-styles', function() {
   gulp.src('example/sass/**/*.scss')
     .pipe(sass().on('error', sass.logError))
     .pipe(cssmin())
     .pipe(gulp.dest('example/css/'));
 });
 
+// Player Styles
+gulp.task('styles', function() {
+  gulp.src('src/*.scss')
+    .pipe(sass().on('error', sass.logError))
+    .pipe(cssmin())
+    .pipe(gulp.dest('dist'));
+});
+
 // Boot up server to look at examples
-gulp.task('serve', ['js', 'styles'], function() {
+gulp.task('serve', ['js', 'example-styles', 'styles'], function() {
   browserSync.init({
     server: {
       baseDir: "./"
@@ -63,7 +71,7 @@ gulp.task('serve', ['js', 'styles'], function() {
   });
 
   gulp.watch('src/*.js', ['js-watch']);
-  gulp.watch('example/sass/**/*.scss', ['css-watch']);
+  gulp.watch('**/*.scss', ['css-watch']);
   gulp.watch('**/*.html').on('change', browserSync.reload);
 
 });
