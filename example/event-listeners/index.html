@@ -18,11 +18,11 @@
 
   <div class="container">
     <h1>Custom Events with API</h1>
-    
+
     <div class="TYVideo"></div>
     <p>Hooking into the `_onPlayerReady` event allows us to notify the user the video is ready</p>
     <h2 class="heading main-heading">Video Not Ready</h2>
-    
+
     <h2 class="heading">On state change listener</h2>
     <p>Using the `onStateChange` param, we can interact with the advert based upon what the video is doing.</p>
 
@@ -75,7 +75,7 @@
           _onPlayerReady: function() {
             var heading = document.querySelector('.heading');
             heading.className += ' ready';
-          },
+          }
         });
       </code>
     </pre>
