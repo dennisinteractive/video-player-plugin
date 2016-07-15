@@ -29,10 +29,10 @@ controls | int | null | Show/ hide the default vide controls. Takes 1 or 0. Use 
 relatedVideos | int | 0 | Show/ hide vide controls. Takes 1 or 0.
 showInfo | int | null | Show/ hide video title and Youtube header on video. Takes 1 or 0.
 mute | boolean | null | Mute Youtube video. Takes 1 or 0.
-playButton | string | null | Custom play button selector. Creates button and adds custom class to it.
-playButtonText | string | 'Play' | Customise play button text.
-pauseButton | string | null | Custom pause button selector. Creates button and adds custom class to it.
-pauseButtonText | string | 'Pause' | Customise pause button text.
+playBtn | string | null | Custom play button selector. Creates button and adds custom class to it.
+playBtnText | string | 'Play' | Customise play button text.
+pauseBtn | string | null | Custom pause button selector. Creates button and adds custom class to it.
+pauseBtnText | string | 'Pause' | Customise pause button text.
 placement | string | null | Specify where you would like the video to appear. After body tag by default.
 videoContainer | string | null | Specify where you would like the video to appear when using data attributes. A selector string which identifies the element to use to place the video that exists within the video container.
 
