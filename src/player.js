@@ -246,16 +246,21 @@
       }
     }.bind( this ));
 
-    // // Add an event listener
-    var playing = new Event('video-playing', { 'detail': 'Video Playing' });
-    var paused = new Event('video-paused', { 'detail': 'Video Paused' });
-    var ended = new Event('video-ended', { 'detail': 'Video Ended' });
+    // Add an event listener
+    // Check if customEvents can be used
+    if (typeof window.CustomEvent === 'function') {
 
-    this.customEvents = {
-      playing: playing,
-      paused: paused,
-      ended: ended
-    };
+      this.customEvents = {
+        playing: playing,
+        paused: paused,
+        ended: ended
+      };
+
+      var playing = new Event('video-playing', { 'detail': 'Video Playing' });
+      var paused = new Event('video-paused', { 'detail': 'Video Paused' });
+      var ended = new Event('video-ended', { 'detail': 'Video Ended' });
+
+    }
 
     if ( this.options.onStateChange ) {
       if ( this.options.onStateChange.playing ) {
