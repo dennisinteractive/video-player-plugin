@@ -234,21 +234,22 @@
   // Listeners
   Player.prototype.assignListeners = function() {
 
-    var matches = matchesPolyfill();
-
-    this.video.addEventListener('click', function( event ) {
-      if ( event.target.nodeName === 'BUTTON' ) {
-        if ( event.target[ matches ]( '.' + this.options.playBtnClass ) ) {
-          this.player.playVideo();
-        } else  if ( event.target[ matches ]( '.' + this.options.pauseBtnClass ) ) {
-          this.player.pauseVideo();
-        }
-      }
-    }.bind( this ));
-
     // Add an event listener
     // Check if customEvents can be used
-    if (typeof window.CustomEvent === 'function') {
+    if ( typeof window.CustomEvent === 'function' ) {
+
+      var matches = matchesPolyfill();
+
+      this.video.addEventListener('click', function( event ) {
+        if ( event.target.nodeName === 'BUTTON' ) {
+          if ( event.target[ matches ]( '.' + this.options.playBtnClass ) ) {
+            this.player.playVideo();
+          } else  if ( event.target[ matches ]( '.' + this.options.pauseBtnClass ) ) {
+            this.player.pauseVideo();
+          }
+        }
+      }.bind( this ));
+
 
       this.customEvents = {
         playing: playing,
@@ -292,19 +293,24 @@
   // Player state change
   Player.prototype._onStateChange = function( event ) {
 
-    if ( this.options.onStateChange ) {
+    if ( typeof window.CustomEvent === 'function' ) {
 
-      switch ( event.data ) {
-        case 0:
-          this.video.dispatchEvent( this.customEvents.ended );
-          break;
-        case 1:
-          this.video.dispatchEvent( this.customEvents.playing );
-          break;
-        case 2:
-          this.video.dispatchEvent( this.customEvents.paused );
-          break;
+      if ( this.options.onStateChange ) {
+
+        switch ( event.data ) {
+          case 0:
+            this.video.dispatchEvent( this.customEvents.ended );
+            break;
+          case 1:
+            this.video.dispatchEvent( this.customEvents.playing );
+            break;
+          case 2:
+            this.video.dispatchEvent( this.customEvents.paused );
+            break;
+        }
+
       }
+
     }
 
   };
