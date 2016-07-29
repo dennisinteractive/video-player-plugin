@@ -21,7 +21,8 @@
         placement: null,
         videoContainer: null,
         onStateChange: null,
-        responsive: null
+        responsive: null,
+        playlist: null
     };
 
     // Add our defaults above into a global array of options
@@ -89,7 +90,8 @@
           autoplay: options.autoPlay,
           controls: options.controls,
           rel: options.relatedVideos,
-          showinfo: options.showInfo
+          showinfo: options.showInfo,
+          playlist: options.playlist
         },
         events: {
           onReady: ( this_._onPlayerReady ).bind( this ),
@@ -289,21 +291,21 @@
   // Player state change
   Player.prototype._onStateChange = function( event ) {
 
-      if ( this.options.onStateChange ) {
+    if ( this.options.onStateChange ) {
 
-        switch ( event.data ) {
-          case 0:
-            this.video.dispatchEvent( this.customEvents.ended );
-            break;
-          case 1:
-            this.video.dispatchEvent( this.customEvents.playing );
-            break;
-          case 2:
-            this.video.dispatchEvent( this.customEvents.paused );
-            break;
-        }
-
+      switch ( event.data ) {
+        case 0:
+          this.video.dispatchEvent( this.customEvents.ended );
+          break;
+        case 1:
+          this.video.dispatchEvent( this.customEvents.playing );
+          break;
+        case 2:
+          this.video.dispatchEvent( this.customEvents.paused );
+          break;
       }
+
+    }
 
   };
 
@@ -353,6 +355,7 @@
   // Look for all elements that has `data-video-id`
   // and populate an array
   var getStandalone = function() {
+
     var playerData = document.querySelectorAll( '[data-video-id]' );
     var standaloneVideos = [];
 
@@ -365,6 +368,7 @@
     });
 
     return standaloneVideos;
+
   };
 
   // Check if the DOM is loaded by looking for 'complete' or 'interactive'
