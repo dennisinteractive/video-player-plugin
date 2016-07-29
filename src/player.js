@@ -234,28 +234,35 @@
   // Listeners
   Player.prototype.assignListeners = function() {
 
-    var matches = matchesPolyfill();
+    // Add an event listener
+    // Check if customEvents can be used
+    if ( typeof window.CustomEvent === 'function' ) {
 
-    this.video.addEventListener('click', function( event ) {
-      if ( event.target.nodeName === 'BUTTON' ) {
-        if ( event.target[ matches ]( '.' + this.options.playBtnClass ) ) {
-          this.player.playVideo();
-        } else  if ( event.target[ matches ]( '.' + this.options.pauseBtnClass ) ) {
-          this.player.pauseVideo();
+      var matches = matchesPolyfill();
+      customEventsPolyfill();
+
+      this.video.addEventListener('click', function( event ) {
+        if ( event.target.nodeName === 'BUTTON' ) {
+          if ( event.target[ matches ]( '.' + this.options.playBtnClass ) ) {
+            this.player.playVideo();
+          } else  if ( event.target[ matches ]( '.' + this.options.pauseBtnClass ) ) {
+            this.player.pauseVideo();
+          }
         }
-      }
-    }.bind( this ));
+      }.bind( this ));
 
-    // // Add an event listener
-    var playing = new Event('video-playing', { 'detail': 'Video Playing' });
-    var paused = new Event('video-paused', { 'detail': 'Video Paused' });
-    var ended = new Event('video-ended', { 'detail': 'Video Ended' });
 
-    this.customEvents = {
-      playing: playing,
-      paused: paused,
-      ended: ended
-    };
+      this.customEvents = {
+        playing: playing,
+        paused: paused,
+        ended: ended
+      };
+
+      var playing = new Event('video-playing', { 'detail': 'Video Playing' });
+      var paused = new Event('video-paused', { 'detail': 'Video Paused' });
+      var ended = new Event('video-ended', { 'detail': 'Video Ended' });
+
+    }
 
     if ( this.options.onStateChange ) {
       if ( this.options.onStateChange.playing ) {
@@ -287,19 +294,24 @@
   // Player state change
   Player.prototype._onStateChange = function( event ) {
 
-    if ( this.options.onStateChange ) {
+    if ( typeof window.CustomEvent === 'function' ) {
 
-      switch ( event.data ) {
-        case 0:
-          this.video.dispatchEvent( this.customEvents.ended );
-          break;
-        case 1:
-          this.video.dispatchEvent( this.customEvents.playing );
-          break;
-        case 2:
-          this.video.dispatchEvent( this.customEvents.paused );
-          break;
+      if ( this.options.onStateChange ) {
+
+        switch ( event.data ) {
+          case 0:
+            this.video.dispatchEvent( this.customEvents.ended );
+            break;
+          case 1:
+            this.video.dispatchEvent( this.customEvents.playing );
+            break;
+          case 2:
+            this.video.dispatchEvent( this.customEvents.paused );
+            break;
+        }
+
       }
+
     }
 
   };
@@ -327,6 +339,23 @@
     var matches = body.matches || body.webkitMatchesSelector || body.msMatchesSelector;
 
     return matches.name;
+
+  }
+
+  function customEventsPolyfill() {
+
+    if ( typeof window.CustomEvent === 'function' ) return false;
+
+    function CustomEvent ( event, params ) {
+      params = params || { bubbles: false, cancelable: false, detail: undefined };
+      var evt = document.createEvent( 'CustomEvent' );
+      evt.initCustomEvent( event, params.bubbles, params.cancelable, params.detail );
+      return evt;
+     }
+
+    CustomEvent.prototype = window.Event.prototype;
+
+    window.CustomEvent = CustomEvent;
 
   }
 
