@@ -235,34 +235,29 @@
   Player.prototype.assignListeners = function() {
 
     // Add an event listener
-    // Check if customEvents can be used
-    if ( typeof window.CustomEvent === 'function' ) {
+    var matches = matchesPolyfill();
+    customEventsPolyfill();
 
-      var matches = matchesPolyfill();
-      customEventsPolyfill();
-
-      this.video.addEventListener('click', function( event ) {
-        if ( event.target.nodeName === 'BUTTON' ) {
-          if ( event.target[ matches ]( '.' + this.options.playBtnClass ) ) {
-            this.player.playVideo();
-          } else  if ( event.target[ matches ]( '.' + this.options.pauseBtnClass ) ) {
-            this.player.pauseVideo();
-          }
+    this.video.addEventListener('click', function( event ) {
+      if ( event.target.nodeName === 'BUTTON' ) {
+        if ( event.target[ matches ]( '.' + this.options.playBtnClass ) ) {
+          this.player.playVideo();
+        } else  if ( event.target[ matches ]( '.' + this.options.pauseBtnClass ) ) {
+          this.player.pauseVideo();
         }
-      }.bind( this ));
+      }
+    }.bind( this ));
 
 
-      this.customEvents = {
-        playing: playing,
-        paused: paused,
-        ended: ended
-      };
+    var playing = new CustomEvent('video-playing', { 'detail': 'Video Playing' });
+    var paused = new CustomEvent('video-paused', { 'detail': 'Video Paused' });
+    var ended = new CustomEvent('video-ended', { 'detail': 'Video Ended' });
 
-      var playing = new Event('video-playing', { 'detail': 'Video Playing' });
-      var paused = new Event('video-paused', { 'detail': 'Video Paused' });
-      var ended = new Event('video-ended', { 'detail': 'Video Ended' });
-
-    }
+    this.customEvents = {
+      playing: playing,
+      paused: paused,
+      ended: ended
+    };
 
     if ( this.options.onStateChange ) {
       if ( this.options.onStateChange.playing ) {
@@ -294,8 +289,6 @@
   // Player state change
   Player.prototype._onStateChange = function( event ) {
 
-    if ( typeof window.CustomEvent === 'function' ) {
-
       if ( this.options.onStateChange ) {
 
         switch ( event.data ) {
@@ -311,8 +304,6 @@
         }
 
       }
-
-    }
 
   };
 
