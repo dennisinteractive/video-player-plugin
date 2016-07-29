@@ -21,7 +21,8 @@
         placement: null,
         videoContainer: null,
         onStateChange: null,
-        responsive: null
+        responsive: null,
+        playlist: null
     };
 
     // Add our defaults above into a global array of options
@@ -89,7 +90,8 @@
           autoplay: options.autoPlay,
           controls: options.controls,
           rel: options.relatedVideos,
-          showinfo: options.showInfo
+          showinfo: options.showInfo,
+          playlist: options.playlist
         },
         events: {
           onReady: ( this_._onPlayerReady ).bind( this ),
