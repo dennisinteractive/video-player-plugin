@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang: en>
+<head>
+  <meta charset: UTF-8>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>API example</title>
+  <link href="/example/css/style.css" rel="stylesheet">
+
+  <link href="/dist/player.css" rel="stylesheet">
+  <script src="/dist/player.min.js"></script>
+</head>
+<body class="api">
+
+  <header class="header">
+    <a href="/">Home</a>
+  </header>
+
+  <div class="container">
+    <h1>Playlists with event listeners</h1>
+
+    <div class="example-div"></div>
+
+    <script>
+      var myVideo = new Player({
+        playlist: '1u-niluB8HI, cHHLHGNpCSA, 2-MBfn8XjIU, pB-5XG-DbAA, ktvTqknDobU',
+        placement: '.example-div',
+        autoPlay: 1,
+        onStateChange: {
+          ended: function() {
+            var body = document.querySelector('body');
+            body.style.backgroundColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
+          }
+        }
+      });
+    </script>
+
+    <p>Let's change the background colour of the body everytime a video finishes.</p>
+
+    <pre>
+      <code class="javascript">
+        var myVideo = new Player({
+          playlist: '1u-niluB8HI, cHHLHGNpCSA, 2-MBfn8XjIU, pB-5XG-DbAA, ktvTqknDobU',
+          placement: '.example-div',
+          autoPlay: 1,
+          onStateChange: {
+            ended: function() {
+              var body = document.querySelector('body');
+              body.style.backgroundColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
+            }
+          }
+        });
+      </code>
+    </pre>
+
+    <a href="/example/playlists" class="btn btn-standard">Back to Playlists</a>
+
+  </div>
+
+  <script type="text/javascript" src="/example/highlight.pack.js"></script>
+  <script>if( window.console ) { hljs.initHighlightingOnLoad(); }</script>
+
+</body>
+</html>
