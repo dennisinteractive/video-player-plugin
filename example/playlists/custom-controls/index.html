@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang: en>
+<head>
+  <meta charset: UTF-8>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>API example</title>
+  <link href="/example/css/style.css" rel="stylesheet">
+
+  <link href="/dist/player.css" rel="stylesheet">
+  <script src="/dist/player.min.js"></script>
+</head>
+<body class="api">
+
+  <header class="header">
+    <a href="/">Home</a>
+  </header>
+
+  <div class="container">
+    <h1>Playlists</h1>
+    <p>With custom controls</p>
+
+    <div class="example-div"></div>
+    <ul class="list navigation">
+      <li class="video-thumb">
+          <a data-videoId="0" class="btn btn-standard" href="#">First Video</a>
+      </li>
+      <li class="video-thumb">
+          <a data-videoId="1" class="btn btn-standard" href="#">Second Video</a>
+      </li>
+      <li class="video-thumb">
+          <a data-videoId="2" class="btn btn-standard" href="#">Third Video</a>
+      </li>
+      <li class="video-thumb">
+          <a data-videoId="3" class="btn btn-standard" href="#">Fourth Video</a>
+      </li>
+      <li class="video-thumb">
+          <a data-videoId="4" class="btn btn-standard" href="#">Fifth Video</a>
+      </li>
+    </ul>
+
+    <script>
+      var videoPlaylist = new Player({
+        videoId: 'kOkQ4T5WO9E',
+        playlist: 'cHHLHGNpCSA, 2-MBfn8XjIU, pB-5XG-DbAA, ktvTqknDobU',
+        placement: '.example-div',
+        autoPlay: 1,
+        _onPlayerReady: onPlayerReady
+      });
+
+      function onPlayerReady(e) {
+        var navigation = document.querySelector('.navigation');
+
+        navigation.addEventListener('click', function(e) {
+          e.preventDefault();
+          e = e || window.event;
+          var target = e.target || e.srcElement,
+              text = target.textContent || text.innerText;
+          var selectedVideo = target.getAttribute('data-videoId');
+
+          videoPlaylist.player.playVideoAt(selectedVideo);
+          videoPlaylist.player.playVideo();
+        }, false);
+      }
+    </script>
+
+    <pre>
+      <code class="javascript">
+        var videoPlaylist = new Player({
+          videoId: 'kOkQ4T5WO9E',
+          playlist: 'cHHLHGNpCSA, 2-MBfn8XjIU, pB-5XG-DbAA, ktvTqknDobU',
+          placement: '.example-div',
+          autoPlay: 1,
+          _onPlayerReady: onPlayerReady
+        });
+
+        function onPlayerReady(e) {
+          var navigation = document.querySelector('.list');
+
+          navigation.addEventListener('click', function(e) {
+            e.preventDefault();
+            e = e || window.event;
+            var target = e.target || e.srcElement,
+                text = target.textContent || text.innerText;
+            var selectedVideo = target.getAttribute('data-videoId');
+
+            videoPlaylist.player.playVideoAt(selectedVideo);
+            videoPlaylist.player.playVideo();
+          }, false);
+        }
+      </code>
+    </pre>
+
+  </div>
+
+  <script type="text/javascript" src="/example/highlight.pack.js"></script>
+  <script>if( window.console ) { hljs.initHighlightingOnLoad(); }</script>
+
+</body>
+</html>
