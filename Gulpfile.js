@@ -77,4 +77,4 @@ gulp.task('serve', ['js', 'example-styles', 'styles'], function() {
 });
 
 // Default task to do all the above
-gulp.task('default', ['serve']);
+gulp.task('default', ['example-styles', 'lint', 'js']);
