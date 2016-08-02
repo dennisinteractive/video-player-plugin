@@ -109,6 +109,10 @@ pre, code {
   margin: 0;
   padding: 0;
 
+  li {
+    list-style-type: none;
+  }
+
   @media screen and (min-width: $mobile) {
     display: flex;
     -webkit-justify-content: space-between;
@@ -152,5 +156,15 @@ pre, code {
         transform: translate(-50%, -50%);
       }
     }
+  }
+}
+
+.navigation {
+  margin-top: 15px;
+  -webkit-justify-content: center;
+          justify-content: center;
+
+  li {
+    margin: 0 10px;
   }
 }
