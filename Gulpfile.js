@@ -66,7 +66,7 @@ gulp.task('styles', function() {
 gulp.task('serve', ['js', 'example-styles', 'styles'], function() {
   browserSync.init({
     server: {
-      baseDir: "./"
+      baseDir: "./example"
     }
   });
 
