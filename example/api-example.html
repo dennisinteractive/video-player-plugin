@@ -12,15 +12,14 @@
 
   <!-- You write code for this content block in another file -->
   
-  <h1>This is the index page</h1>
 
-
-
+  
+  
 <nav>
     
-      <a href="home" class=" active "> Home</a>
+      <a href="home" class=""> Home</a>
     
-      <a href="api-example" class=""> Api-example</a>
+      <a href="api-example" class=" active "> Api-example</a>
     
       <a href="contacts" class=""> Contacts</a>
     
@@ -28,6 +27,31 @@
     
 </nav>
 
+
+  <div class="container">
+    <h1>Using the API</h1>
+
+    <div class="example-div"></div>
+
+    <script>
+      var myVideo = new Player({
+        videoId: 'JXqTxFkZhao',
+        placement: '.example-div'
+      });
+    </script>
+
+    <p>All you need is the ID of the video you want to display and where you want to place it.</p>
+
+    <pre>
+      <code class="javascript">
+        var myVideo = new Player({
+          videoId: 'YrblkMd-KMs',
+          placement: '.example-div'
+        });
+      </code>
+    </pre>
+
+  </div>
 
 
 

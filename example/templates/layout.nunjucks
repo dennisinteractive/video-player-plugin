@@ -11,25 +11,7 @@
 </head>
 
   <!-- You write code for this content block in another file -->
-  
-  <h1>This is the index page</h1>
-
-
-
-<nav>
-    
-      <a href="home" class=" active "> Home</a>
-    
-      <a href="api-example" class=""> Api-example</a>
-    
-      <a href="contacts" class=""> Contacts</a>
-    
-      <a href="testimonials" class=""> Testimonials</a>
-    
-</nav>
-
-
-
+  {% block content %} {% endblock %}
 
   <script type="text/javascript" src="/highlight.pack.js"></script>
   <script>if( window.console ) { hljs.initHighlightingOnLoad(); }</script>

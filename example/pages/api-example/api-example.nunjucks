@@ -1,0 +1,34 @@
+<!-- api-example.nunjucks -->
+{% extends "layout.nunjucks" %}
+
+{% block content %}
+
+  {% import 'macros/navigation.nunjucks' as nav %}
+  {{nav.active('api-example')}}
+
+  <div class="container">
+    <h1>Using the API</h1>
+
+    <div class="example-div"></div>
+
+    <script>
+      var myVideo = new Player({
+        videoId: 'JXqTxFkZhao',
+        placement: '.example-div'
+      });
+    </script>
+
+    <p>All you need is the ID of the video you want to display and where you want to place it.</p>
+
+    <pre>
+      <code class="javascript">
+        var myVideo = new Player({
+          videoId: 'YrblkMd-KMs',
+          placement: '.example-div'
+        });
+      </code>
+    </pre>
+
+  </div>
+
+{% endblock %}
