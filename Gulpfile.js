@@ -8,6 +8,7 @@ var jshint = require('gulp-jshint');
 var cssmin = require('gulp-cssmin');
 var sass = require('gulp-sass');
 var browserSync = require('browser-sync').create();
+var ghPages = require('gulp-gh-pages');
 
 var config = {
   dir: {
@@ -75,6 +76,12 @@ gulp.task('serve', ['js', 'example-styles', 'styles'], function() {
   gulp.watch('**/*.html').on('change', browserSync.reload);
 
 });
+
+gulp.task('deploy', function() {
+  return gulp.src('./example/**/*')
+    .pipe(ghPages());
+});
+
 
 // Default task to do all the above
 gulp.task('default', ['example-styles', 'lint', 'js']);
