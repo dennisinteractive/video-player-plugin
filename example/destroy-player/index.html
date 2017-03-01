@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang: en>
+<head>
+  <meta charset: UTF-8>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Destroy Player</title>
+  <link href="../css/style.css" rel="stylesheet">
+
+  <link href="https://cdn.rawgit.com/matt3188/video-player-plugin/master/dist/player.css" rel="stylesheet">
+  <script src="https://cdn.rawgit.com/matt3188/video-player-plugin/master/dist/player.min.js"></script>
+</head>
+<body class="destroy-player">
+
+  <header class="header">
+    <a href="/">Home</a>
+  </header>
+
+  <div class="container">
+    <h1>Destroy Player</h1>
+
+    <div class="video-player"></div>
+
+    <script>
+      var myVideo = new Player({
+        videoId: 'JXqTxFkZhao',
+        placement: '.video-player',
+        onStateChange: {
+          ended: function() {
+            myVideo.destroy();
+          }
+        }
+      });
+    </script>
+    <pre>
+      <code class="javascript">
+      var myVideo = new Player({
+        videoId: 'JXqTxFkZhao',
+        placement: '.video-player',
+        onStateChange: {
+          ended: function() {
+            myVideo.destroy();
+          }
+        }
+      });
+      </code>
+    </pre>
+
+  </div>
+
+  <script type="text/javascript" src="/highlight.pack.js"></script>
+  <script>if( window.console ) { hljs.initHighlightingOnLoad(); }</script>
+
+</body>
+</html>
