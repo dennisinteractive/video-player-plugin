@@ -1,6 +1,6 @@
 {
   "name": "video-player-plugin",
-  "version": "1.0.1",
+  "version": "1.0.4",
   "description": "A plugin to utilise the Youtube api. A way to standardise our code for commericial projects",
   "main": "src/player.js",
   "scripts": {

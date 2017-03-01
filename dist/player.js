@@ -230,6 +230,12 @@
 
   };
 
+  Player.prototype.destroy = function() {
+
+    this.player.stopVideo();
+    this.player.destroy();
+
+  };
 
   // Events
 
@@ -308,7 +314,6 @@
     }
 
   };
-
 
   // Private Methods
 
