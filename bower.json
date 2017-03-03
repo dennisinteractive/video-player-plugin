@@ -13,7 +13,7 @@
     "video",
     "player"
   ],
-  "homepage": "https://github.com/matt3188/video-player-plugin",
+  "homepage": "https://github.com/dennisinteractive/video-player-plugin",
   "ignore": [
     "**/.*",
     "node_modules",
