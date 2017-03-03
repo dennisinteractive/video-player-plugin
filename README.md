@@ -24,6 +24,7 @@ Option | Type | Default | Description
 videoId | string | null | Sets ID of video to be displayed.
 width | int | 480 | Sets width of video.
 height | int | 270 | Sets height of video.
+responsive | int | null | Sets width of player to 100% and maintains aspect ratio.
 autoPlay | int | null | Autoplay video on page load. Takes 1 or 0. Use 0 to turn autoPlay off.
 controls | int | null | Show/ hide the default vide controls. Takes 1 or 0. Use 0 to turn controls off.
 relatedVideos | int | 0 | Show/ hide vide controls. Takes 1 or 0.
