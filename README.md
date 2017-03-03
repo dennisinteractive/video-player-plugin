@@ -49,5 +49,5 @@ videoContainer | string | null | Specify where you would like the video to appea
 &copy; 2016, produced and maintained for [Dennis Digital][dennis], free under the [MIT License][license]
 
 
-[license]:https://raw.githubusercontent.com/matt3188/video-player-plugin/master/LICENSE
+[license]:https://raw.githubusercontent.com/dennisinteractive/video-player-plugin/master/LICENSE
 [dennis]:http://www.dennis.co.uk/
