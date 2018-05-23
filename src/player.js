@@ -1,6 +1,6 @@
 (function() {
 
-  this.Player = function() {
+  window.Player = function() {
 
     var defaults = {
         videoId: null,
